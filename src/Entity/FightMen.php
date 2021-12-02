@@ -25,20 +25,27 @@ class FightMen
     private $rounds;
 
     /**
-     * @ORM\ManyToMany(targetEntity=FighterMen::class, inversedBy="fightsMen")
+     * @ORM\ManyToOne(targetEntity=FighterMen::class, inversedBy="redCornerFights")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $fighters;
+    private $redFighterMen;
 
     /**
-     * @ORM\OneToMany(targetEntity=FighterMen::class, mappedBy="wins")
+     * @ORM\ManyToOne(targetEntity=FighterMen::class, inversedBy="blueCornerFights")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $blueFighterMen;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=FighterMen::class, inversedBy="victories")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $winner;
 
-    public function __construct()
-    {
-        $this->fighters = new ArrayCollection();
-        $this->winner = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
 
     public function getId(): ?int
     {
@@ -75,56 +82,50 @@ class FightMen
         return $this;
     }
 
-    /**
-     * @return Collection|FighterMen[]
-     */
-    public function getFighters(): Collection
+    public function getRedFighterMen(): ?FighterMen
     {
-        return $this->fighters;
+        return $this->redFighterMen;
     }
 
-    public function addFighter(FighterMen $fighter): self
+    public function setRedFighterMen(?FighterMen $redFighterMen): self
     {
-        if (!$this->fighters->contains($fighter)) {
-            $this->fighters[] = $fighter;
-        }
+        $this->redFighterMen = $redFighterMen;
 
         return $this;
     }
 
-    public function removeFighter(FighterMen $fighter): self
+    public function getBlueFighterMen(): ?FighterMen
     {
-        $this->fighters->removeElement($fighter);
+        return $this->blueFighterMen;
+    }
+
+    public function setBlueFighterMen(?FighterMen $blueFighterMen): self
+    {
+        $this->blueFighterMen = $blueFighterMen;
 
         return $this;
     }
 
-    /**
-     * @return Collection|FighterMen[]
-     */
-    public function getWinner(): Collection
+    public function getWinner(): ?FighterMen
     {
         return $this->winner;
     }
 
-    public function addWinner(FighterMen $winner): self
+    public function setWinner(?FighterMen $winner): self
     {
-        if (!$this->winner->contains($winner)) {
-            $this->winner[] = $winner;
-            $winner->setWins($this);
-        }
+        $this->winner = $winner;
 
         return $this;
     }
 
-    public function removeWinner(FighterMen $winner): self
+    public function getDate(): ?\DateTimeInterface
     {
-        if ($this->winner->removeElement($winner)) {
-            // set the owning side to null (unless already changed)
-            if ($winner->getWins() === $this) {
-                $winner->setWins(null);
-            }
-        }
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

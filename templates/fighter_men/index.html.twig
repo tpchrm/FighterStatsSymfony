@@ -20,8 +20,12 @@
             <tr>
                 <td>{{ fighter_men.lastname }}</td>
                 <td>{{ fighter_men.firstname }}</td>
-                <td>{{ fighter_men.division}}</td>
-                <td>{{ fighter_men.wins}}</td>
+                <td>{{ fighter_men.division.divisionEng }}</td>
+                {% if fighter_men.wins is empty %}
+                    <td>0</td>
+                {% else %}
+                    <td> {{ fighter_men.wins}} </td>
+                {% endif %}
                 <td>
                     <a href="">Détails</a>
                 </td>

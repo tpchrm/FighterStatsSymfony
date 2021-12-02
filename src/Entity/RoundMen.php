@@ -175,4 +175,57 @@ class RoundMen
 
         return $this;
     }
+
+    public function Simulate(): self
+    {
+        // génération des frappes
+        $this->setBlueStrikes(rand(10, 50));
+        $this->setRedStrikes(rand(10, 50));
+
+        // génération des frappes significatives
+        $MaxBlueStrikes = $this->getBlueStrikes();
+        $this->setBlueSignificantsStrikes(rand(ceil($MaxBlueStrikes/rand(5,8)), $MaxBlueStrikes));
+        $MaxRedStrikes = $this->getRedStrikes();
+        $this->setRedSignificantsStrikes(rand(ceil($MaxRedStrikes/rand(5,8)), $MaxRedStrikes));
+
+        // génération des takedowns
+        $this->setBlueTakedowns(rand(0, 5));
+        $this->setRedTakedowns(rand(0, 5));
+
+        // génération des scores
+        // calcul du pourcentage de frappes réussies
+        $blueSuccessStrike = ($this->getBlueSignificantsStrikes() *100) / $this->getBlueStrikes();
+        $redSuccessStrike = ($this->getRedSignificantsStrikes() *100) / $this->getRedStrikes();
+
+        if ($blueSuccessStrike > $redSuccessStrike) {
+            $this->setBlueScore(rand(5,10));
+            $this->setRedScore(rand(0,5));
+        } elseif ($blueSuccessStrike < $redSuccessStrike) {
+            $this->setBlueScore(rand(0,5));
+            $this->setRedScore(rand(5,10));
+        } else {
+            $draw_score = rand(0,5);
+            $this->setBlueScore($draw_score);
+            $this->setRedScore($draw_score);
+        }
+
+        if ($this->getBlueTakedowns() > $this->getRedTakedowns()) {
+            $remaining_blue_points = 10 - $this->getBlueScore();
+            $this->setBlueScore($this->getBlueScore() + rand(0,$remaining_blue_points));
+        } elseif ($this->getBlueTakedowns() < $this->getRedTakedowns()) {
+            $remaining_red_points = 10 - $this->getRedScore();
+            $this->setRedScore($this->getRedScore() + rand(0,$remaining_red_points));
+        } else {
+            $remaining_blue_points = 10 - $this->getBlueScore();
+            $remaining_red_points = 10 - $this->getRedScore();
+            $draw_blue_score = rand(0,$remaining_blue_points);
+            $draw_red_score = rand(0,$remaining_red_points);
+
+            $this->setBlueScore($this->getBlueScore() + $draw_blue_score);
+            $this->setRedScore($this->getRedScore() + $draw_red_score);
+        }
+
+        return $this;
+    }
+
 }

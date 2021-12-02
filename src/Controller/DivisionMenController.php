@@ -32,9 +32,7 @@ class DivisionMenController extends AbstractController
 
         $divisions_mens = $repository->findAll();
 
-        return $this->render('division_men/index.html.twig', [
-            'divisions_mens' => $divisions_mens,
-        ]);
+        return $this->render('division_men/index.html.twig', ['divisions_mens' => $divisions_mens]);
     }
 
 //    /**

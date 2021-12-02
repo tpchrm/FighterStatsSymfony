@@ -52,18 +52,31 @@ class FighterMen
     private $origin;
 
     /**
-     * @ORM\ManyToMany(targetEntity=FightMen::class, mappedBy="fighters")
+     * @ORM\OneToMany(targetEntity=FightMen::class, mappedBy="redFighterMen")
      */
-    private $fightsMen;
+    private $redCornerFights;
 
     /**
-     * @ORM\ManyToOne(targetEntity=FightMen::class, inversedBy="winner")
+     * @ORM\OneToMany(targetEntity=FightMen::class, mappedBy="blueFighterMen")
+     */
+    private $blueCornerFights;
+
+    /**
+     * @ORM\OneToMany(targetEntity=FightMen::class, mappedBy="winner")
+     */
+    private $victories;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $wins;
 
     public function __construct()
     {
         $this->fightsMen = new ArrayCollection();
+        $this->redCornerFights = new ArrayCollection();
+        $this->blueCornerFights = new ArrayCollection();
+        $this->victories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,36 +159,104 @@ class FighterMen
     /**
      * @return Collection|FightMen[]
      */
-    public function getFightsMen(): Collection
+    public function getRedCornerFights(): Collection
     {
-        return $this->fightsMen;
+        return $this->redCornerFights;
     }
 
-    public function addFightsMan(FightMen $fightsMan): self
+    public function addRedCornerFight(FightMen $redCornerFight): self
     {
-        if (!$this->fightsMen->contains($fightsMan)) {
-            $this->fightsMen[] = $fightsMan;
-            $fightsMan->addFighter($this);
+        if (!$this->redCornerFights->contains($redCornerFight)) {
+            $this->redCornerFights[] = $redCornerFight;
+            $redCornerFight->setRedFighterMen($this);
         }
 
         return $this;
     }
 
-    public function removeFightsMan(FightMen $fightsMan): self
+    public function removeRedCornerFight(FightMen $redCornerFight): self
     {
-        if ($this->fightsMen->removeElement($fightsMan)) {
-            $fightsMan->removeFighter($this);
+        if ($this->redCornerFights->removeElement($redCornerFight)) {
+            // set the owning side to null (unless already changed)
+            if ($redCornerFight->getRedFighterMen() === $this) {
+                $redCornerFight->setRedFighterMen(null);
+            }
         }
 
         return $this;
     }
 
-    public function getWins(): ?FightMen
+    /**
+     * @return Collection|FightMen[]
+     */
+    public function getBlueCornerFights(): Collection
+    {
+        return $this->blueCornerFights;
+    }
+
+    public function addBlueCornerFight(FightMen $blueCornerFight): self
+    {
+        if (!$this->blueCornerFights->contains($blueCornerFight)) {
+            $this->blueCornerFights[] = $blueCornerFight;
+            $blueCornerFight->setBlueFighterMen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlueCornerFight(FightMen $blueCornerFight): self
+    {
+        if ($this->blueCornerFights->removeElement($blueCornerFight)) {
+            // set the owning side to null (unless already changed)
+            if ($blueCornerFight->getBlueFighterMen() === $this) {
+                $blueCornerFight->setBlueFighterMen(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    /**
+     * @return Collection|FightMen[]
+     */
+    public function getVictories(): Collection
+    {
+        return $this->victories;
+    }
+
+    public function addVictory(FightMen $victory): self
+    {
+        if (!$this->victories->contains($victory)) {
+            $this->victories[] = $victory;
+            $victory->setWinner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVictory(FightMen $victory): self
+    {
+        if ($this->victories->removeElement($victory)) {
+            // set the owning side to null (unless already changed)
+            if ($victory->getWinner() === $this) {
+                $victory->setWinner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getWins(): ?int
     {
         return $this->wins;
     }
 
-    public function setWins(?FightMen $wins): self
+    public function setWins(?int $wins): self
     {
         $this->wins = $wins;
 

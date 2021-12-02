@@ -32,8 +32,6 @@ class CountryController extends AbstractController
         $repository = $managerRegistry->getRepository(Country::class);
         $countries = $repository->findAll();
 
-        return $this->render('country/index.html.twig', [
-            'countries' => $countries,
-        ]);
+        return $this->render('country/index.html.twig', ['countries' => $countries]);
     }
 }
