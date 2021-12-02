@@ -100,7 +100,6 @@ class DivisionMen
 
     public function __toString()
     {
-        // TODO: Implement __toString() method.
         return $this->getDivisionFr();
     }
 }

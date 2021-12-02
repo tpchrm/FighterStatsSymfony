@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FighterMenController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Dylan/OneDrive/Documents/Symfony/FighterStatsSymfony/src/Controller/FighterMenController.php'|file_link(0) }}">src/Controller/FighterMenController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Dylan/OneDrive/Documents/Symfony/FighterStatsSymfony/templates/fighter_men/index.html.twig'|file_link(0) }}">templates/fighter_men/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a class="btn btn-danger" href="{{ path('fighter_men_add')}}">Ajouter un combattant</a>
+    <table class="table table-dark table-bordered table-striped table-hover text-center">
+        <thead>
+        <tr>
+            <td colspan="5">DIVISIONS</td>
+        </tr>
+        <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Division</td>
+            <td>Victoire</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fighter_men in list_fighter_men %}
+            <tr>
+                <td>{{ fighter_men.lastname }}</td>
+                <td>{{ fighter_men.firstname }}</td>
+                <td>{{ fighter_men.division}}</td>
+                <td>{{ fighter_men.wins}}</td>
+                <td>
+                    <a href="">Détails</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
