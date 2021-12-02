@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FighterMenRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,15 +52,19 @@ class FighterMen
     private $origin;
 
     /**
-     * @ORM\ManyToOne(targetEntity=FightMen::class, inversedBy="fighters")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=FightMen::class, mappedBy="fighters")
      */
-    private $fightMen;
+    private $fightsMen;
 
     /**
-     * @ORM\OneToOne(targetEntity=FightMen::class, mappedBy="winner", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=FightMen::class, inversedBy="winner")
      */
     private $wins;
+
+    public function __construct()
+    {
+        $this->fightsMen = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,14 +143,29 @@ class FighterMen
         return $this;
     }
 
-    public function getFightMen(): ?FightMen
+    /**
+     * @return Collection|FightMen[]
+     */
+    public function getFightsMen(): Collection
     {
-        return $this->fightMen;
+        return $this->fightsMen;
     }
 
-    public function setFightMen(?FightMen $fightMen): self
+    public function addFightsMan(FightMen $fightsMan): self
     {
-        $this->fightMen = $fightMen;
+        if (!$this->fightsMen->contains($fightsMan)) {
+            $this->fightsMen[] = $fightsMan;
+            $fightsMan->addFighter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFightsMan(FightMen $fightsMan): self
+    {
+        if ($this->fightsMen->removeElement($fightsMan)) {
+            $fightsMan->removeFighter($this);
+        }
 
         return $this;
     }
@@ -154,13 +175,8 @@ class FighterMen
         return $this->wins;
     }
 
-    public function setWins(FightMen $wins): self
+    public function setWins(?FightMen $wins): self
     {
-        // set the owning side of the relation if necessary
-        if ($wins->getWinner() !== $this) {
-            $wins->setWinner($this);
-        }
-
         $this->wins = $wins;
 
         return $this;

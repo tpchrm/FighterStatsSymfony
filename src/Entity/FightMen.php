@@ -25,21 +25,19 @@ class FightMen
     private $rounds;
 
     /**
-     * @ORM\OneToMany(targetEntity=FighterMen::class, mappedBy="fightMen")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=FighterMen::class, inversedBy="fightsMen")
      */
     private $fighters;
 
     /**
-     * @ORM\OneToOne(targetEntity=FighterMen::class, inversedBy="wins", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=FighterMen::class, mappedBy="wins")
      */
     private $winner;
 
     public function __construct()
     {
-        $this->rounds = new ArrayCollection();
         $this->fighters = new ArrayCollection();
+        $this->winner = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,7 +87,6 @@ class FightMen
     {
         if (!$this->fighters->contains($fighter)) {
             $this->fighters[] = $fighter;
-            $fighter->setFightMen($this);
         }
 
         return $this;
@@ -97,24 +94,37 @@ class FightMen
 
     public function removeFighter(FighterMen $fighter): self
     {
-        if ($this->fighters->removeElement($fighter)) {
-            // set the owning side to null (unless already changed)
-            if ($fighter->getFightMen() === $this) {
-                $fighter->setFightMen(null);
-            }
+        $this->fighters->removeElement($fighter);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FighterMen[]
+     */
+    public function getWinner(): Collection
+    {
+        return $this->winner;
+    }
+
+    public function addWinner(FighterMen $winner): self
+    {
+        if (!$this->winner->contains($winner)) {
+            $this->winner[] = $winner;
+            $winner->setWins($this);
         }
 
         return $this;
     }
 
-    public function getWinner(): ?FighterMen
+    public function removeWinner(FighterMen $winner): self
     {
-        return $this->winner;
-    }
-
-    public function setWinner(FighterMen $winner): self
-    {
-        $this->winner = $winner;
+        if ($this->winner->removeElement($winner)) {
+            // set the owning side to null (unless already changed)
+            if ($winner->getWins() === $this) {
+                $winner->setWins(null);
+            }
+        }
 
         return $this;
     }
