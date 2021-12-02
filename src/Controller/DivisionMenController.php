@@ -31,7 +31,6 @@ class DivisionMenController extends AbstractController
         $repository= $doctrine->getRepository(DivisionMen::class);
         $divisions_mens = $repository->findAll();
 
-
         return $this->render('division_men/index.html.twig', [
             'divisions_mens' => $divisions_mens,
         ]);
