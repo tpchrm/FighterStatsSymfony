@@ -41,6 +41,7 @@
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
+        "twbs/bootstrap": "^5.1",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -85,7 +86,10 @@
             "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "copy .\\vendor\\twbs\\bootstrap\\dist\\css\\bootstrap.css .\\public\\assets\\bootstrap\\css\\",
+            "copy .\\vendor\\twbs\\bootstrap\\dist\\css\\bootstrap.css.map .\\public\\assets\\bootstrap\\css\\",
+            "copy .\\vendor\\twbs\\bootstrap\\dist\\js\\bootstrap.bundle.js .\\public\\assets\\bootstrap\\js\\"
         ]
     },
     "conflict": {
