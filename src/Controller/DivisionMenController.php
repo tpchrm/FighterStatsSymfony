@@ -28,7 +28,7 @@ class DivisionMenController extends AbstractController
         $div6 = new DivisionMen();
         $div->setDivisionFr('Poids Mouches')->setDivisionEng('Flyweight');
         $div1->setDivisionFr('Poids Coqs')->setDivisionEng('Bantamweight');
-        $div2->setDivisionFr('Poids Plumes')->setDivisionEng('Fearthereight');
+        $div2->setDivisionFr('Poids Plumes')->setDivisionEng('Feartherweight');
         $div3->setDivisionFr('Poids Légers')->setDivisionEng('Lightweight');
         $div4->setDivisionFr('Poids Mi-Moyens')->setDivisionEng('Welterweight');
         $div5->setDivisionFr('Poids Moyens')->setDivisionEng('Middleweight');
