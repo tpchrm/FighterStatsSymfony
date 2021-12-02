@@ -15,12 +15,33 @@ class DivisionMenController extends AbstractController
      */
     public function addDivisionMen(ManagerRegistry $doctrine): Response
     {
+
+
         $em = $doctrine->getManager();
 
-//        $div1 = new DivisionMen();
-//        $div1->setDivisionFr('Poids Mouches')->setDivisionEng('Flyweight');
-//
-//        $em->persist($div1);
+        $div = new DivisionMen();
+        $div1 = new DivisionMen();
+        $div2 = new DivisionMen();
+        $div3 = new DivisionMen();
+        $div4 = new DivisionMen();
+        $div5 = new DivisionMen();
+        $div6 = new DivisionMen();
+        $div->setDivisionFr('Poids Mouches')->setDivisionEng('Flyweight');
+        $div1->setDivisionFr('Poids Coqs')->setDivisionEng('Bantamweight');
+        $div2->setDivisionFr('Poids Plumes')->setDivisionEng('Fearthereight');
+        $div3->setDivisionFr('Poids Légers')->setDivisionEng('Lightweight');
+        $div4->setDivisionFr('Poids Mi-Moyens')->setDivisionEng('Welterweight');
+        $div5->setDivisionFr('Poids Moyens')->setDivisionEng('Middleweight');
+        $div6->setDivisionFr('Poids Lourd Léger')->setDivisionEng('Light Heavyweight');
+        $div6->setDivisionFr('Poids Lourd')->setDivisionEng('Heavyweight');
+
+//        $em->persist($div);
+        $em->persist($div1);
+        $em->persist($div2);
+        $em->persist($div3);
+        $em->persist($div4);
+        $em->persist($div5);
+        $em->persist($div6);
 //        $em->flush();
 
         $repository=$em->getRepository(DivisionMen::class);
