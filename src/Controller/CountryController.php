@@ -17,18 +17,18 @@ class CountryController extends AbstractController
     {
 
         // À commenter pour ne pas ajouter de doublons dans la base
-//        $countries_array = array('Brésil', 'États-Unis', 'Iran', 'Daghestan', 'Nouvelle-Zélande', 'Irlande', 'Russie',  'Nigéria', 'Royaume-Uni', 'Italie', 'République Tchèque', 'Arabie Saoudite', 'Tchétchénie', 'Chine', 'Argentine', 'Norvège', 'France', 'Jamaïque', 'Pologne', 'Autriche', 'Suisse', 'Géorgie', 'Moldavie');
-//        sort($countries_array, SORT_STRING );
-//
-//        foreach ($countries_array as $name) {
-//            $country = new Country();
-//            $country->setName($name);
-//
-//            $entity_manager = $managerRegistry->getManager();
-//            $entity_manager->persist($country);
-//            $entity_manager->flush();
-//        }
-//
+        $countries_array = array('Australie', 'Croatie', 'Écosse', 'Brésil', 'États-Unis', 'Iran', 'Daghestan', 'Nouvelle-Zélande', 'Irlande', 'Russie',  'Nigéria', 'Royaume-Uni', 'Italie', 'République Tchèque', 'Arabie Saoudite', 'Tchétchénie', 'Chine', 'Argentine', 'Norvège', 'France', 'Jamaïque', 'Pologne', 'Autriche', 'Suisse', 'Géorgie', 'Moldavie');
+        sort($countries_array, SORT_STRING );
+
+        foreach ($countries_array as $name) {
+            $country = new Country();
+            $country->setName($name);
+
+            $entity_manager = $managerRegistry->getManager();
+            $entity_manager->persist($country);
+            $entity_manager->flush();
+        }
+
         $repository = $managerRegistry->getRepository(Country::class);
         $countries = $repository->findAll();
 
