@@ -15,38 +15,22 @@ class DivisionMenController extends AbstractController
      */
     public function addDivisionMen(ManagerRegistry $doctrine): Response
     {
+        // À commenter pour ne pas ajouter de doublons dans la base
+//        $division_fr_array = array('Poids Mouches', 'Poids Coqs', 'Poids Plumes', 'Poids Légers', 'Poids Mi-Moyens', 'Poids Moyens', 'Poids Lourd Léger', 'Poids Lourd');
+//        $division_eng_array = array('Flyweight', 'Bantamweight', 'Featherweight', 'Lightweight', 'Welterweight', 'Middleweight', 'Light Heavyweight', 'Heavyweight');
 
+//        for ($i = 0; $i < sizeof($division_fr_array); $i++) {
+//            $em = $doctrine->getManager();
+//            $division = new DivisionMen();
+//            $division->setDivisionFr($division_fr_array[$i]);
+//            $division->setDivisionEng($division_eng_array[$i]);
+//            $em->persist($division);
+//            $em->flush();
+//        }
 
-        $em = $doctrine->getManager();
+        $repository= $doctrine->getRepository(DivisionMen::class);
 
-        $div = new DivisionMen();
-        $div1 = new DivisionMen();
-        $div2 = new DivisionMen();
-        $div3 = new DivisionMen();
-        $div4 = new DivisionMen();
-        $div5 = new DivisionMen();
-        $div6 = new DivisionMen();
-        $div->setDivisionFr('Poids Mouches')->setDivisionEng('Flyweight');
-        $div1->setDivisionFr('Poids Coqs')->setDivisionEng('Bantamweight');
-        $div2->setDivisionFr('Poids Plumes')->setDivisionEng('Feartherweight');
-        $div3->setDivisionFr('Poids Légers')->setDivisionEng('Lightweight');
-        $div4->setDivisionFr('Poids Mi-Moyens')->setDivisionEng('Welterweight');
-        $div5->setDivisionFr('Poids Moyens')->setDivisionEng('Middleweight');
-        $div6->setDivisionFr('Poids Lourd Léger')->setDivisionEng('Light Heavyweight');
-        $div6->setDivisionFr('Poids Lourd')->setDivisionEng('Heavyweight');
-
-//        $em->persist($div);
-        $em->persist($div1);
-        $em->persist($div2);
-        $em->persist($div3);
-        $em->persist($div4);
-        $em->persist($div5);
-        $em->persist($div6);
-//        $em->flush();
-
-        $repository=$em->getRepository(DivisionMen::class);
         $divisions_mens = $repository->findAll();
-
 
         return $this->render('division_men/index.html.twig', [
             'divisions_mens' => $divisions_mens,
