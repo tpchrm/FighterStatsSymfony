@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CountryController extends AbstractController
 {
     /**
-     * @Route("/country_add", name="country_add")
+     * @Route("/country/add", name="country_add")
      */
     public function addCountry(ManagerRegistry $managerRegistry): Response
     {
