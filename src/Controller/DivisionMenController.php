@@ -11,11 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DivisionMenController extends AbstractController
 {
     /**
-     * @Route("/division/men/add", name="division_men_add")
+     * @Route("/division/men/generate", name="division_men_generate")
      */
     public function addDivisionMen(ManagerRegistry $doctrine): Response
     {
-        // À commenter pour ne pas ajouter de doublons dans la base
+//         À commenter pour ne pas ajouter de doublons dans la base
 //        $division_fr_array = array('Poids Mouches', 'Poids Coqs', 'Poids Plumes', 'Poids Légers', 'Poids Mi-Moyens', 'Poids Moyens', 'Poids Lourd Léger', 'Poids Lourd');
 //        $division_eng_array = array('Flyweight', 'Bantamweight', 'Featherweight', 'Lightweight', 'Welterweight', 'Middleweight', 'Light Heavyweight', 'Heavyweight');
 //

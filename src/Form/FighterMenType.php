@@ -24,7 +24,6 @@ class FighterMenType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $repository_division= $this->doctrine->getRepository(DivisionMen::class);
         $divisions_mens = $repository_division->findAll();
 

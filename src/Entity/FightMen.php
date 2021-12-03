@@ -38,7 +38,7 @@ class FightMen
 
     /**
      * @ORM\ManyToOne(targetEntity=FighterMen::class, inversedBy="victories")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $winner;
 

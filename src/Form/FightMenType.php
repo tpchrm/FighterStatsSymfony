@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class FightMenType extends AbstractType
 {
     private $managerRegistry;
+
     public function __construct(ManagerRegistry $doctrine)
     {
         $this->managerRegistry = $doctrine;
@@ -24,15 +25,15 @@ class FightMenType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $repository = $this->managerRegistry->getRepository(DivisionMen::class);
-        $currentDivision = $repository->findBy(['division_eng' => 'Featherweight']);
+        $currentDivision = $repository->findBy(['division_eng' => $options['division']]);
 
         $repository = $this->managerRegistry->getRepository(FighterMen::class);
         $fighters = $repository->findBy(['division' => $currentDivision]);
         $builder
-            ->add('date', DateType::class)
+            ->add('date', DateType::class, ['widget' => 'single_text'])
             ->add('blueFighterMen', EntityType::class, ['class' => FighterMen::class, 'choices' => $fighters])
             ->add('redFighterMen', EntityType::class, ['class' => FighterMen::class, 'choices' => $fighters])
-            ->add('Enregistrer',SubmitType::class)
+            ->add('Simuler',SubmitType::class)
         ;
     }
 
@@ -40,6 +41,7 @@ class FightMenType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => FightMen::class,
+            'division' => null
         ]);
     }
 }
