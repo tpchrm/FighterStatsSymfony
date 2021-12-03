@@ -58,8 +58,7 @@ class RoundMen
     private $red_score;
 
     /**
-     * @ORM\ManyToOne(targetEntity=FightMen::class, inversedBy="rounds")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=FightMen::class, inversedBy="rounds", cascade={"persist"})
      */
     private $fightMen;
 

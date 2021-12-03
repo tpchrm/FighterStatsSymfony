@@ -14,27 +14,57 @@ use Symfony\Component\Routing\Annotation\Route;
 class FightController extends AbstractController
 {
     /**
+     * @Route("/fight/list", name="fight_list")
+     */
+    public function listFight(ManagerRegistry $managerRegistry): Response
+    {
+        $repository = $managerRegistry->getRepository(FightMen::class);
+        $fights = $repository->findAll();
+
+        return $this->render('fight/index.html.twig', ['fights' => $fights]);
+    }
+
+    /**
      * @Route("/fight/new/{division_eng}", name="fight_new")
      */
-    public function index(Request $request, ManagerRegistry $managerRegistry, $division_eng): Response
+    public function simulateFight(Request $request, ManagerRegistry $managerRegistry, $division_eng): Response
     {
+        $fightMen = new FightMen();
+
         $form = $this->createForm(FightMenType::class, $fightMen, ["division" => $division_eng]);
 
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
-            dump($fightMen);
-            $formData=$form->getData();
-            dump($formData);
+            for ($i = 1; $i <= 5 ; $i++) {
+                $round = new RoundMen();
+                $round->Simulate();
 
+                $entityManager= $managerRegistry->getManager();
+                $entityManager->persist($round);
 
-//            $entityManager= $managerRegistry->getManager();
-//            $entityManager->persist($fightMen);
-//            $entityManager->flush();
+                $fightMen->addRound($round);
+            }
 
-//            return $this->json($fightMen);
-//            return $this->redirectToRoute('fight_new', ['division_eng' => 'Featherweight']);
+            $rounds = $fightMen->getRounds();
+
+            $blue_score = 0;
+            $red_score =0;
+            foreach ($rounds as $round) {
+                $red_score += $round->getRedScore();
+                $blue_score += $round->getBlueScore();
+            }
+
+            if ($red_score > $blue_score) {
+                $fightMen->setWinner($fightMen->getRedFighterMen());
+            } elseif ($red_score < $blue_score) {
+                $fightMen->setWinner($fightMen->getBlueFighterMen());
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('fight_list');
         }
 
-        return $this->renderForm('fight/index.html.twig', ['fight_form' => $form]);
+        return $this->renderForm('fight/simulate.html.twig', ['fight_form' => $form]);
     }
 }

@@ -6,6 +6,7 @@ use App\Repository\FightMenRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\ErrorHandler\Collecting;
 
 /**
  * @ORM\Entity(repositoryClass=FightMenRepository::class)
@@ -62,6 +63,9 @@ class FightMen
 
     public function addRound(RoundMen $round): self
     {
+        if ($this->rounds == null) {
+            $this->rounds = new ArrayCollection();
+        }
         if (!$this->rounds->contains($round)) {
             $this->rounds[] = $round;
             $round->setFightMen($this);
@@ -129,4 +133,14 @@ class FightMen
 
         return $this;
     }
+
+//    public function __toString()
+//    {
+//        $chaine = "";
+//
+//        foreach ( as round) {
+//
+//    }
+//        return $chaine;
+//    }
 }

@@ -116,8 +116,8 @@ class FighterMenController extends AbstractController
     {
         $countries = ['États-Unis', 'États-Unis', 'Mexique', 'Corée du Sud', 'États-Unis', 'Royaume-Uni', 'Australie'];
 
-        $fighter_firstnames = ['Max', 'Brian', 'Yair', 'Jung', 'Calvin', 'Arnold', 'Alexander'];
-        $fighter_lastnames = ['Holloway', 'Ortega', 'Rodriguez', 'Chan Sung', 'Kattar', 'Allen', 'Volkanovski'];
+        $fighter_firstnames = ['Max', 'Brian', 'Yair', 'Chan Sung', 'Calvin', 'Arnold', 'Alexander'];
+        $fighter_lastnames = ['Holloway', 'Ortega', 'Rodriguez', 'Jung', 'Kattar', 'Allen', 'Volkanovski'];
         $fighter_weights = [146.00, 145.00, 145.50, 145.00, 145.00, 145.00, 145.00];
         $fighter_heights = [71.00, 68.00, 71.00, 67.00, 71.00, 68.00, 66.00];
 

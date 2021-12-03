@@ -1,62 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row text-center">
-        <div class="col-6">
-            <img class="img-fluid w-50" id="blue_fighter_image" alt="image combattant coin bleu">
-        </div>
+    <table class="table table-borderless table-dark text-light text-center">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Coin bleu</th>
+            <th>Coin rouge</th>
+            <th>Division</th>
+            <th>Vainqueur</th>
+        </tr>
+        </thead>
 
-        <div class="col-6">
-            <img class="img-fluid w-50" id="red_fighter_image" alt="image combattant coin rouge" style="transform: scaleX(-1);">
-        </div>
-    </div>
-
-    {{ form_start(fight_form) }}
-    <div class="row p-lg-0 p-md-0 p-sm-3">
-        <div class="col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-8 offset-sm-2 text-center">
-            {{ form_label(fight_form.date, 'Date du combat') }}
-            {{ form_widget(fight_form.date, { 'attr': {'class': 'text-center'} }) }}
-        </div>
-    </div>
-
-    <div class="row p-lg-0 p-md-0 p-sm-3">
-        <div class="col-lg-4 offset-lg-1 col-md-4 offset-md-0 col-sm-8 offset-sm-2 text-center">
-            {{ form_label(fight_form.blueFighterMen, 'Combattant au coin bleu') }}
-            {{ form_widget(fight_form.blueFighterMen, { 'attr': {'class': 'text-center'} }) }}
-        </div>
-        <div class="col-lg-2 offset-lg-0 col-md-4 offset-md-0 col-sm-8 offset-sm-2 d-flex align-items-center justify-content-center">
-            <span class="fw-bold display-3">-VS- </span>
-        </div>
-        <div class="col-lg-4 offset-lg-0 col-md-4 offset-md-0 col-sm-8 offset-sm-2 text-center">
-            {{ form_label(fight_form.redFighterMen, 'Combatttant au coin rouge') }}
-            {{ form_widget(fight_form.redFighterMen, { 'attr': {'class': 'text-center'} }) }}
-        </div>
-    </div>
-
-    <div class="row text-center p-lg-2 p-md-3 p-sm-3">
-        {{ form_row(fight_form.Simuler, { 'attr': {'class': 'btn-danger rounded-pill'} }) }}
-    </div>
-    {{ form_end(fight_form) }}
-{% endblock %}
-
-{% block javascripts %}
-    <script type="text/javascript">
-        window.onload = () => {
-            let red_fighter_name = document.getElementById('fight_men_redFighterMen').options[document.getElementById('fight_men_redFighterMen').selectedIndex].innerHTML.toLowerCase().replace(" ", "");
-            document.getElementById('red_fighter_image').src = "{{ asset('assets/images/fighters/') }}" + red_fighter_name + ".png";
-
-            let blue_fighter_name = document.getElementById('fight_men_blueFighterMen').options[document.getElementById('fight_men_blueFighterMen').selectedIndex].innerHTML.toLowerCase().replace(" ", "");
-            document.getElementById('blue_fighter_image').src = "{{ asset('assets/images/fighters/') }}" + blue_fighter_name + ".png";
-        }
-
-        document.getElementById('fight_men_redFighterMen').onclick = () => {
-            let red_fighter_name = document.getElementById('fight_men_redFighterMen').options[document.getElementById('fight_men_redFighterMen').selectedIndex].innerHTML.toLowerCase().replace(" ", "");
-            document.getElementById('red_fighter_image').src = "{{ asset('assets/images/fighters/') }}" + red_fighter_name + ".png";
-        }
-
-        document.getElementById('fight_men_blueFighterMen').onclick = () => {
-            let blue_fighter_name = document.getElementById('fight_men_blueFighterMen').options[document.getElementById('fight_men_blueFighterMen').selectedIndex].innerHTML.toLowerCase().replace(" ", "");
-            document.getElementById('blue_fighter_image').src = "{{ asset('assets/images/fighters/') }}" + blue_fighter_name + ".png";
-        }
-    </script>
+        <tbody>
+        {% for fight in fights %}
+            <tr>
+                <td>{{ fight.date.format('d/m/Y') }}</td>
+                <td>{{ fight.blueFighterMen }}</td>
+                <td>{{ fight.redFighterMen }}</td>
+                <td>{{ fight.redFighterMen.division }}</td>
+                <td>{{ fight.winner }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
