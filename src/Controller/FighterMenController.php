@@ -45,7 +45,7 @@ class FighterMenController extends AbstractController
         }
 
         return $this->renderForm('fighter_men/add.html.twig', [
-            'fighter_form' => $form
+            'fighter_men_add' => $form
         ]);
     }
 
@@ -59,7 +59,7 @@ class FighterMenController extends AbstractController
         $fighter_men=$repository->find($id);
 
         return $this->render('fighter_men/show.html.twig', [
-            'fighter_men' => $fighter_men
+            'fighter_men_show' => $fighter_men
         ]);
     }
 
@@ -81,9 +81,29 @@ class FighterMenController extends AbstractController
         }
 
         return $this->renderForm('fighter_men/update.html.twig', [
-            'fighter_form' => $form
+            'fighter_men_update' => $form
         ]);
     }
 
+    /**
+     * @Route("/fighter/men/delete/{id}", name="fighter_men_delete")
+     */
+    public function deleteFighterMen(Request $request, ManagerRegistry $doctrine, FighterMen $fighterMen): Response
+    {
+        $form = $this->createForm(FighterMenType::class, $fighterMen);
+        $form->handleRequest($request);
 
+        if($form->isSubmitted()&&$form->isValid()){
+            $fightermen=$form->getData();
+            $em = $doctrine->getManager();
+            $em->remove($fightermen);
+            $em->flush();
+
+            return $this->redirectToRoute('fighter_men');
+        }
+
+        return $this->renderForm('fighter_men/delete.html.twig', [
+            'fighter_men_delete' => $form
+        ]);
+    }
 }

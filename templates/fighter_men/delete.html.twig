@@ -1,40 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center">Modification d'un Combattant</h1>
+    <h1 class="text-center">Suppression d'un Combattant</h1>
 
-    {{ form_start(fighter_men_update, {
+    {{ form_start(fighter_men_delete, {
         'attr':{'class':'row g-3'}
     }) }}
     <div class="col-md-6">
-        {{ form_row(fighter_men_update.lastname, {
+        {{ form_row(fighter_men_delete.lastname, {
             'label':'Nom'
         }) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(fighter_men_update.firstname, {
+        {{ form_row(fighter_men_delete.firstname, {
             'label':'Prénom'
         }) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(fighter_men_update.height, {
+        {{ form_row(fighter_men_delete.height, {
             'label':'Poids'
         }) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(fighter_men_update.weight, {
+        {{ form_row(fighter_men_delete.weight, {
             'label':'Taille'
         }) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(fighter_men_update.origin, {
+        {{ form_row(fighter_men_delete.origin, {
             'label':'Pays'
         }) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(fighter_men_update.division, {
+        {{ form_row(fighter_men_delete.division, {
             'label':'Division'
         }) }}
     </div>
-    {{ form_end(fighter_men_update) }}
+    {{ form_end(fighter_men_delete) }}
 {% endblock %}

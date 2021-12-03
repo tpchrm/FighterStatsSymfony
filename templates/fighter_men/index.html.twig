@@ -27,8 +27,9 @@
                     <td> {{ fighter_men.wins}} </td>
                 {% endif %}
                 <td>
-                    <a href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
-                    <a href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Editer</a>
+                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Editer</a>
+                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

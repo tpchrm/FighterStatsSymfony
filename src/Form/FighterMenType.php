@@ -42,15 +42,13 @@ class FighterMenType extends AbstractType
             ])
             ->add('division',EntityType::class, [
                 'class'=>DivisionMen::class,
-                'choices'=> $divisions_mens
+                'choices'=> $divisions_mens,
                 ])
             ->add('origin',EntityType::class, [
                 'class'=>Country::class,
-                'choices'=> $country
+                'choices'=> $country,
             ])
-//            ->add('fightsMen')
-//            ->add('wins')
-            ->add('Enregistrer',SubmitType::class)
+            ->add('enregistrer',SubmitType::class)
 
         ;
     }

@@ -1,8 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div>
-        <h1 class="text-center">Formulaire d'ajout d'un Combattant</h1>
-        {{ form(fighter_form) }}
-    </div>
+    <h1 class="text-center">Formulaire d'ajout d'un Combattant</h1>
+
+            {{ form_start(fighter_men_add, {
+                'attr':{'class':'row g-3'}
+            }) }}
+            <div class="col-md-6">
+                {{ form_row(fighter_men_add.lastname, {
+                        'label':'Nom'
+                }) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(fighter_men_add.firstname, {
+                        'label':'Prénom'
+                }) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(fighter_men_add.height, {
+                        'label':'Poids'
+                }) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(fighter_men_add.weight, {
+                        'label':'Taille'
+                }) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(fighter_men_add.origin, {
+                        'label':'Pays'
+                }) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(fighter_men_add.division, {
+                        'label':'Division'
+                }) }}
+            </div>
+            {{ form_end(fighter_men_add) }}
+
+{#    {{ form(fighter_men_add) }}#}
 {% endblock %}
