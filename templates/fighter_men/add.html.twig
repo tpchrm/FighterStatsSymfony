@@ -36,7 +36,11 @@
                         'label':'Division'
                 }) }}
             </div>
+        <div class="col-md-12">
+                {{ form_row(fighter_men_add.enregistrer, {
+                        'attr':{'class':'btn-primary w-100'}
+                }) }}
+        </div>
             {{ form_end(fighter_men_add) }}
 
-{#    {{ form(fighter_men_add) }}#}
 {% endblock %}
