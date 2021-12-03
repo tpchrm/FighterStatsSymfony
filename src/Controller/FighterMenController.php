@@ -108,46 +108,4 @@ class FighterMenController extends AbstractController
             'fighter_men_delete' => $form
         ]);
     }
-
-    /**
-     * @Route("/fighter/men/generate", name="fighter_men_generate")
-     */
-    public function generateFighterMen(ManagerRegistry $doctrine): Response
-    {
-        $countries = ['États-Unis', 'États-Unis', 'Mexique', 'Corée du Sud', 'États-Unis', 'Royaume-Uni', 'Australie'];
-
-        $fighter_firstnames = ['Max', 'Brian', 'Yair', 'Chan Sung', 'Calvin', 'Arnold', 'Alexander'];
-        $fighter_lastnames = ['Holloway', 'Ortega', 'Rodriguez', 'Jung', 'Kattar', 'Allen', 'Volkanovski'];
-        $fighter_weights = [146.00, 145.00, 145.50, 145.00, 145.00, 145.00, 145.00];
-        $fighter_heights = [71.00, 68.00, 71.00, 67.00, 71.00, 68.00, 66.00];
-
-        for ($i = 0; $i < sizeof($fighter_firstnames); $i++) {
-            $fighter = new FighterMen();
-
-            $repository= $doctrine->getRepository(DivisionMen::class);
-            $division = $repository->findBy(['division_eng' => 'Featherweight']);
-            $fighter->setDivision($division[0]);
-
-            $repository= $doctrine->getRepository(Country::class);
-            $origin = $repository->findBy( ['name' => $countries[$i]]);
-            $fighter->setOrigin($origin[0]);
-
-            $fighter->setFirstname($fighter_firstnames[$i]);
-            $fighter->setLastname($fighter_lastnames[$i]);
-            $fighter->setWeight($fighter_weights[$i]);
-            $fighter->setHeight($fighter_heights[$i]);
-
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($fighter);
-            $entityManager->flush();
-            dump($fighter);
-        }
-
-        $repository=$doctrine->getManager()->getRepository(FighterMen::class);
-        $list_fighter_men=$repository->findAll();
-
-        return $this->render('fighter_men/index.html.twig', [
-            'list_fighter_men' => $list_fighter_men,
-            ]);
-    }
 }
