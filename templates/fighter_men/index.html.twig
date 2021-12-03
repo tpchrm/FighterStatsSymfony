@@ -27,7 +27,8 @@
                     <td> {{ fighter_men.wins}} </td>
                 {% endif %}
                 <td>
-                    <a href="">Détails</a>
+                    <a href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                    <a href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Editer</a>
                 </td>
             </tr>
         {% endfor %}

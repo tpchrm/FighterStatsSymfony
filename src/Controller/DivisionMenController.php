@@ -18,7 +18,7 @@ class DivisionMenController extends AbstractController
         // À commenter pour ne pas ajouter de doublons dans la base
 //        $division_fr_array = array('Poids Mouches', 'Poids Coqs', 'Poids Plumes', 'Poids Légers', 'Poids Mi-Moyens', 'Poids Moyens', 'Poids Lourd Léger', 'Poids Lourd');
 //        $division_eng_array = array('Flyweight', 'Bantamweight', 'Featherweight', 'Lightweight', 'Welterweight', 'Middleweight', 'Light Heavyweight', 'Heavyweight');
-
+//
 //        for ($i = 0; $i < sizeof($division_fr_array); $i++) {
 //            $em = $doctrine->getManager();
 //            $division = new DivisionMen();

@@ -13,6 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class FighterMenController extends AbstractController
 {
     /**
+     * @Route("/fighter/men", name="fighter_men")
+     */
+    public function index(ManagerRegistry $doctrine): Response
+    {
+        $repository=$doctrine->getManager()->getRepository(FighterMen::class);
+        $list_fighter_men=$repository->findAll();
+
+        return $this->render('fighter_men/index.html.twig', [
+            'list_fighter_men' => $list_fighter_men,
+        ]);
+    }
+
+    /**
      * @Route("/fighter/men/add", name="fighter_men_add")
      */
     public function addFighterMen(Request $request, ManagerRegistry $doctrine): Response
@@ -29,7 +42,6 @@ class FighterMenController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('fighter_men');
-
         }
 
         return $this->renderForm('fighter_men/add.html.twig', [
@@ -38,15 +50,40 @@ class FighterMenController extends AbstractController
     }
 
     /**
-     * @Route("/fighter/men", name="fighter_men")
+     * @Route("/fighter/men/show/{id}", name="fighter_men_show")
      */
-    public function index(ManagerRegistry $doctrine): Response
+    public function showFighterMen(ManagerRegistry $doctrine, int $id): Response
     {
+        //afficher tout les combattant present de notre BDD par rapport a l'Id
         $repository=$doctrine->getManager()->getRepository(FighterMen::class);
-        $list_fighter_men=$repository->findAll();
+        $fighter_men=$repository->find($id);
 
-        return $this->render('fighter_men/index.html.twig', [
-            'list_fighter_men' => $list_fighter_men,
+        return $this->render('fighter_men/show.html.twig', [
+            'fighter_men' => $fighter_men
         ]);
     }
+
+    /**
+     * @Route("/fighter/men/update/{id}", name="fighter_men_update")
+     */
+    public function updateFighterMen(Request $request, ManagerRegistry $doctrine, FighterMen $fighterMen): Response
+    {
+        $form = $this->createForm(FighterMenType::class, $fighterMen);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&&$form->isValid()){
+            $fightermen=$form->getData();
+            $em = $doctrine->getManager();
+            $em->persist($fightermen);
+            $em->flush();
+
+            return $this->redirectToRoute('fighter_men');
+        }
+
+        return $this->renderForm('fighter_men/update.html.twig', [
+            'fighter_form' => $form
+        ]);
+    }
+
+
 }
