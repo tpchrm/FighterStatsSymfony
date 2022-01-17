@@ -8,7 +8,7 @@
                 <img src="{{ asset('assets/images/fighters/'~ fighter_men_show.firstname ~ fighter_men_show.lastname ~'.png') }}" class="img-fluid w-75">
             </div>
             <div class="col-md-6 col-sm-12 py-3 text-center">
-                <span class="fw-bold fs-4">{{ fighter_men_show.firstname }} - {{ fighter_men_show.lastname }}</span>
+                <span class="fw-bold fs-2">{{ fighter_men_show.firstname }} - {{ fighter_men_show.lastname }}</span>
             </div>
 
         </div>
@@ -19,29 +19,24 @@
             </div>
             <label class="form-label">Poids - Taille</label>
             <div class="col-md-6 py-3 text-center">
-                <span class="fw-bold fs-4">{{ fighter_men_show.height }} - {{ fighter_men_show.weight }}</span>
+                <span class="fw-bold display-2">{{ fighter_men_show.height }} - {{ fighter_men_show.weight }}</span>
             </div>
             <label class="form-label">Division</label>
             <div class="col-md-6 py-3 text-center">
                 <span class="fw-bold fs-4">{{ fighter_men_show.division.divisionEng }}</span>
             </div>
-            <label class="form-label">Victoire</label>
+            <label class="form-label">Victoire - Défaite</label>
             <div class="col-md-6 py-3 text-center">
-                <span class="fw-bold fs-4">
+                <span class="fw-bold display-2">
                     {% if fighter_men_show.wins is empty %}
-                    0
+                    10 -
                     {% else %}
 
                             {{ fighter_men_show.wins }}
-                    {% endif %}</span>
-            </div>
-            <label class="form-label">Défaite</label>
-            <div class="py-3">
-                <span class="fw-bold fs-4">
+                    {% endif %}</span>  <span class="fw-bold display-2">
                     {% if fighter_men_show.wins is empty %}
-                        0
+                       5
                     {% else %}
-
                         {{ fighter_men_show.wins }}
                     {% endif %}</span>
             </div>
@@ -55,12 +50,8 @@
             </thead>
             <tbody>
             <tr>
-                <td>{{ fighter_men_show.lastname }}</td>
-                <td>{{ fighter_men_show.firstname }}</td>
-            </tr>
-            <tr>
-                <td>{{ fighter_men_show.lastname }}</td>
-                <td>{{ fighter_men_show.firstname }}</td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
