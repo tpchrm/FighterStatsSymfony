@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <a class="btn btn-danger" href="{{ path('fighter_men')}}">Retour au listing</a>
+
     <h1 class="text-center">Formulaire d'ajout d'un Combattant</h1>
 
             {{ form_start(fighter_men_add, {

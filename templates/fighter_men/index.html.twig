@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="row py-3">
+        <div class="col-10">
+            <h1 class="fw-bold text-center">Liste de tous les combattants</h1>
+        </div>
+        <div class="d-flex align-items-center col-2">
+            <a class="btn btn-secondary" href="{{ path('fighter_men_add') }}">Ajouter un combattant</a>
+        </div>
+    </div>
     <table class="table table-dark table-bordered table-striped table-hover text-center">
         <thead>
         <tr>
-            <td colspan="4">DIVISIONS</td>
-            <td colspan="1">
-                <a class="btn btn-secondary" href="{{ path('fighter_men_add') }}">Ajouter un combattant</a>
-            </td>
-        </tr>
-        <tr>
             <td>Nom</td>
             <td>Prénom</td>
-            <td>Division</td>
-            <td>Victoire</td>
-            <td></td>
+            <td>Détails</td>
         </tr>
         </thead>
         <tbody>
@@ -22,12 +22,6 @@
             <tr>
                 <td>{{ fighter_men.lastname }}</td>
                 <td>{{ fighter_men.firstname }}</td>
-                <td>{{ fighter_men.division.divisionEng }}</td>
-                {% if fighter_men.wins is empty %}
-                    <td>0</td>
-                {% else %}
-                    <td> {{ fighter_men.wins }} </td>
-                {% endif %}
                 <td>
                     <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">
 
