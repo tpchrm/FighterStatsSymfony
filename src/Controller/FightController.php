@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\DivisionMen;
+use App\Entity\FighterMen;
 use App\Entity\FightMen;
 use App\Entity\RoundMen;
 use App\Form\FightMenType;
@@ -59,6 +61,7 @@ class FightController extends AbstractController
             } elseif ($red_score < $blue_score) {
                 $fightMen->setWinner($fightMen->getBlueFighterMen());
             }
+            $fightMen->getWinner()->setWins($fightMen->getWinner()->getWins() + 1);
 
             $entityManager->flush();
 
@@ -66,5 +69,18 @@ class FightController extends AbstractController
         }
 
         return $this->renderForm('fight/simulate.html.twig', ['fight_form' => $form]);
+    }
+
+    /**
+     * @Route("/fight/stats/{fight_id}", name="fight_stats")
+     */
+    public function statsFight(ManagerRegistry $managerRegistry, $fight_id): Response
+    {
+        $repository = $managerRegistry->getRepository(FightMen::class);
+        $fight = $repository->findOneBy(['id' => $fight_id]);
+        $repository = $managerRegistry->getRepository(RoundMen::class);
+        $rounds = $repository->findBy(['fightMen' => $fight]);
+
+        return $this->render('fight/stats.html.twig', ['fight' => $fight, 'rounds' => $rounds]);
     }
 }

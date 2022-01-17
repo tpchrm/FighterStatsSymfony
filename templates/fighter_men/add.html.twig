@@ -20,12 +20,12 @@
             </div>
             <div class="col-md-6">
                 {{ form_row(fighter_men_add.height, {
-                        'label':'Poids'
+                        'label':'Poids (en livres)'
                 }) }}
             </div>
             <div class="col-md-6">
                 {{ form_row(fighter_men_add.weight, {
-                        'label':'Taille'
+                        'label':'Taille (en pouces)'
                 }) }}
             </div>
             <div class="col-md-6">
@@ -40,7 +40,7 @@
             </div>
         <div class="col-md-12">
                 {{ form_row(fighter_men_add.enregistrer, {
-                        'attr':{'class':'btn-primary w-100'}
+                        'attr':{'class':'btn-danger w-100'}
                 }) }}
         </div>
             {{ form_end(fighter_men_add) }}

@@ -11,11 +11,45 @@
         {% endblock %}
     </head>
 
-    <body class="container bg-dark text-light h-100">
+    <body class="bg-dark text-light h-100">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+        <span class="navbar-brand">
+            <a class="text-decoration-none" href="{{ path('main_menu')   }}">
+                <img src="{{  asset('assets/images/assets/favicon.png') }}" alt="Logo" style="width: 32px">
+            </a>
+            FightersStats™ -
+            <span class="text-danger">Connecté(e) en tant que #USER.NAME#</span>
+        </span>
+            <div>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#LogOutModal" class="btn btn-danger rounded-pill">Déconnexion</button>
+                <div class="modal fade" id="LogOutModal" tabindex="-1" aria-labelledby="LogOutModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content bg-dark">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Avertissement</h5>
+                            </div>
+                            <div class="modal-body">
+                                Êtes vous sûr de vouloir vous déconnecter de FightersStats™ ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-warning rounded-pill" data-bs-dismiss="modal">Annuler</button>
+                                <a href="#" class="btn btn-danger rounded-pill">Confirmer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
         {% block body %}{% endblock %}
+    </div>
     </body>
 
-    {% block javascripts %}{% endblock %}
-    <script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {% endblock %}
 
 </html>

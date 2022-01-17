@@ -1,27 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table class="table table-borderless table-dark text-light text-center">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Coin bleu</th>
-            <th>Coin rouge</th>
-            <th>Division</th>
-            <th>Vainqueur</th>
-        </tr>
-        </thead>
+    <div class="py-2">
+        <h1>Simuler un combat</h1>
+        <div class="d-flex justify-content-around">
+            <a href="{{ path('fight_new', {'division_eng': 'Flyweight'}) }}" class="btn btn-danger">Poids Mouches</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Bantamweight'}) }}" class="btn btn-danger">Poids Coqs</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Featherweight'}) }}" class="btn btn-danger">Poids Plumes</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Lightweight'}) }}" class="btn btn-danger">Poids Légers</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Welterweight'}) }}" class="btn btn-danger">Poids Mi-Moyens</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Middleweight'}) }}" class="btn btn-danger">Poids Moyens</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Light Heavyweight'}) }}" class="btn btn-danger">Poids Lourds-Légers</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Heavyweight'}) }}" class="btn btn-danger">Poids Lourds</a>
+        </div>
+    </div>
 
-        <tbody>
-        {% for fight in fights %}
+    <div class="py-2">
+        <h1>Liste des derniers combats</h1>
+
+        {% if fights is empty %}
+            <div class="alert alert-warning text-center">
+                Aucun combat n'a été programmé pour le moment.
+            </div>
+        {% endif %}
+
+        <table class="table table-dark table-bordered table-striped table-hover text-center">
+            <thead>
             <tr>
-                <td>{{ fight.date.format('d/m/Y') }}</td>
-                <td>{{ fight.blueFighterMen }}</td>
-                <td>{{ fight.redFighterMen }}</td>
-                <td>{{ fight.redFighterMen.division }}</td>
-                <td>{{ fight.winner }}</td>
+                <th>Date</th>
+                <th>Coin bleu</th>
+                <th>Coin rouge</th>
+                <th>Division</th>
+                <th>Vainqueur</th>
+                <th>Statistiques</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+            {% for fight in fights %}
+                <tr>
+                    <td>{{ fight.date.format('d/m/Y') }}</td>
+                    <td>{{ fight.blueFighterMen }}</td>
+                    <td>{{ fight.redFighterMen }}</td>
+                    <td>{{ fight.redFighterMen.division }}</td>
+                    <td>{{ fight.winner }}</td>
+                    <td>
+                        <a href="{{ path('fight_stats', {'fight_id': fight.id}) }}" class="btn btn-danger">Voir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

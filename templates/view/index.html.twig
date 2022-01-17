@@ -1,22 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ViewController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="py-2">
+        <h1>Liste des derniers combats <a class="btn btn-secondary" href="{{ path('fight_list') }}">Programmer un combat</a></h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        {% if lastFights is empty %}
+            <div class="alert alert-warning text-center">
+                Aucun combat n'a été programmé pour le moment.
+            </div>
+        {% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Thoma/Documents/Symfony/FighterStats/src/Controller/ViewController.php'|file_link(0) }}">src/Controller/ViewController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Thoma/Documents/Symfony/FighterStats/templates/view/index.html.twig'|file_link(0) }}">templates/view/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <table class="table table-dark table-bordered table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Coin bleu</th>
+                <th>Coin rouge</th>
+                <th>Division</th>
+                <th>Vainqueur</th>
+                <th>Statistiques</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for fight in lastFights %}
+                <tr>
+                    <td>{{ fight.date.format('d/m/Y') }}</td>
+                    <td>{{ fight.blueFighterMen }}</td>
+                    <td>{{ fight.redFighterMen }}</td>
+                    <td>{{ fight.redFighterMen.division }}</td>
+                    <td>{{ fight.winner }}</td>
+                    <td>
+                        <a href="{{ path('fight_stats', {'fight_id': fight.id}) }}" class="btn btn-danger">Voir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="py-2">
+        <h1>Liste des derniers combattants <a class="btn btn-secondary" href="{{ path('fighter_men_add') }}">Ajouter un combattant</a></h1>
+
+        {% if lastFighters is empty %}
+            <div class="alert alert-warning text-center">
+                Aucun combattant n'a été ajouté pour le moment.
+            </div>
+        {% endif %}
+
+        <table class="table table-dark table-bordered table-striped table-hover text-center">
+            <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Prénom</td>
+                <td>Origine</td>
+                <td>Division</td>
+                <td>Détails</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for fighter_men in lastFighters %}
+                <tr>
+                    <td>{{ fighter_men.lastname }}</td>
+                    <td>{{ fighter_men.firstname }}</td>
+                    <td>{{ fighter_men.origin }}</td>
+                    <td>{{ fighter_men.division.divisionEng }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                        <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                        <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
-
-{# @TODO : ICI FAIRE LE MENU AVEC LES QUATRES BOUTON DE REDIRECTION VERS LES DIFFERENTES FONCTIONNALITÉS #}

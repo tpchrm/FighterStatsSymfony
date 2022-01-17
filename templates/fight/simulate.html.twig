@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    {{ form_start(fight_form) }}
+    {{ form_start(fight_form, { 'attr': {'id': 'form_twice_check'}}) }}
     <div class="row p-lg-0 p-md-0 p-sm-3">
         <div class="col-lg-2 offset-lg-5 col-md-2 offset-md-5 col-sm-8 offset-sm-2 text-center">
             {{ form_label(fight_form.date, 'Date du combat') }}
@@ -34,9 +34,13 @@
     </div>
 
     <div class="row text-center p-lg-2 p-md-3 p-sm-3">
-        {{ form_row(fight_form.Simuler, { 'attr': {'class': 'btn-danger rounded-pill'} }) }}
+        {{ form_row(fight_form.Simuler, { 'attr': {'class': 'btn-danger rounded-pill'}}) }}
     </div>
     {{ form_end(fight_form) }}
+
+    <div id="twice_alert" class="alert alert-danger text-center" hidden>
+        Un combattant ne peux pas se battre contre lui-même !
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -60,5 +64,14 @@
             console.log(blue_fighter_name);
             document.getElementById('blue_fighter_image').src = "{{ asset('assets/images/fighters/') }}" + blue_fighter_name.replace(" ", "") + ".png";
         }
+
+        document.getElementById('form_twice_check').onsubmit = (ev => {
+            ev.preventDefault();
+            if (document.getElementById('fight_men_redFighterMen').value === document.getElementById('fight_men_blueFighterMen').value) {
+                document.getElementById('twice_alert').hidden = false;
+            } else {
+                document.getElementById('form_twice_check').submit();
+            }
+        })
     </script>
 {% endblock %}

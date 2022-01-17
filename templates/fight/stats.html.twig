@@ -1,0 +1,367 @@
+{% extends 'base.html.twig' %}
+
+{% set blueScore = 0 %}
+    {% set redScore = 0 %}
+    {% set blueScoreArray = [] %}
+    {% set redScoreArray = [] %}
+
+    {% for round in rounds %}
+        {% set blueScore = blueScore + round.blueScore %}
+        {% set blueScoreArray = blueScoreArray|merge([round.blueScore]) %}
+        {% set redScore = redScore + round.redScore %}
+        {% set redScoreArray = redScoreArray|merge([round.redScore]) %}
+    {% endfor %}
+
+    {% set blueStrikes = 0 %}
+    {% set redStrikes = 0 %}
+    {% set blueStrikesArray = [] %}
+    {% set redStrikesArray = [] %}
+
+    {% for round in rounds %}
+        {% set blueStrikes = blueStrikes + round.blueStrikes %}
+        {% set blueStrikesArray = blueStrikesArray|merge([round.blueStrikes]) %}
+        {% set redStrikes = redStrikes + round.redStrikes %}
+        {% set redStrikesArray = redStrikesArray|merge([round.redStrikes]) %}
+    {% endfor %}
+
+    {% set blueSignificants = 0 %}
+    {% set redSignificants = 0 %}
+    {% set blueSignificantsArray = [] %}
+    {% set redSignificantsArray = [] %}
+
+    {% for round in rounds %}
+        {% set blueSignificants = blueSignificants + round.blueSignificantsStrikes %}
+        {% set blueSignificantsArray = blueSignificantsArray|merge([round.blueSignificantsStrikes]) %}
+        {% set redSignificants = redSignificants + round.redSignificantsStrikes %}
+        {% set redSignificantsArray = redSignificantsArray|merge([round.redSignificantsStrikes]) %}
+    {% endfor %}
+
+    {% set blueTakedowns = 0 %}
+    {% set redTakedowns = 0 %}
+    {% set blueTakedownsArray = [] %}
+    {% set redTakedownsArray = [] %}
+
+    {% for round in rounds %}
+        {% set blueTakedowns = blueTakedowns + round.blueTakedowns %}
+        {% set blueTakedownsArray = blueTakedownsArray|merge([round.blueTakedowns]) %}
+        {% set redTakedowns = redTakedowns + round.redTakedowns %}
+        {% set redTakedownsArray = redTakedownsArray|merge([round.redTakedowns]) %}
+    {% endfor %}
+
+{% block body %}
+    <div class="py-2 row d-flex justify-content-between">
+        <div class="col-sm-12 col-md-6">
+            <h2 class="text-center text-decoration-underline">Informations du combat</h2>
+            <div class="row text-center">
+                <span class="text-warning">{{ fight.date.format("d/m/Y") }}</span>
+                <span class="text-info"> {{ fight.winner.division }}</span>
+            </div>
+            <div class="row">
+                <div class="col-5 text-center">
+                    <a class="link-light" href="{{ path('fighter_men_show',{'id': fight.blueFighterMen.id }) }}">
+                        <img class="img-fluid" src="{{ asset('assets/images/fighters/' ~ fight.blueFighterMen.firstname|replace({' ': ''})|lower ~ fight.blueFighterMen.lastname|replace({' ': ''})|lower ~ '.png') }}" alt="Combattant coin bleu">
+                        <span class="fw-bold">{{ fight.blueFighterMen }}</span>
+                    </a>
+                </div>
+
+                <div class="col-2 d-flex align-items-center justify-content-center">
+                    <span class="h1 fw-bold">VS</span>
+                </div>
+
+                <div class="col-5 text-center">
+                    <a class="link-light" href="{{ path('fighter_men_show',{'id': fight.redFighterMen.id }) }}">
+                        <img class="img-fluid" src="{{ asset('assets/images/fighters/' ~ fight.redFighterMen.firstname|replace({' ': ''})|lower ~ fight.redFighterMen.lastname|replace({' ': ''})|lower ~ '.png') }}" style="transform: scaleX(-1);" alt="Combattant coin rouge">
+                        <span class="fw-bold">{{ fight.redFighterMen }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <h2 class="text-center text-decoration-underline">Analyses générales du combat</h2>
+            <div class="d-flex justify-content-around fw-bold">
+                <div class="text-center row">
+                    <span class="col-6 fw-bold fs-2 text-primary">{{blueStrikes }}</span>
+                    <span class="col-6 fw-bold fs-2 text-danger">{{ redStrikes }}</span>
+                    <span class="col-12 text-muted fs-6">Frappes</span>
+                </div>
+
+                <div class="text-center row">
+                    <span class="col-6 fw-bold fs-2 text-primary">{{ blueSignificants}}</span>
+                    <span class="col-6 fw-bold fs-2 text-danger">{{ redSignificants }}</span>
+                    <span class="col-12 text-muted fs-6">Significatives</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-around fs-1 fw-bold">
+                <div class="text-center row">
+                    <span class="col-6 fw-bold fs-2 text-primary">{{ ((blueSignificants * 100) / blueStrikes)|number_format(2, ',') }} %</span>
+                    <span class="col-6 fw-bold fs-2 text-danger">{{ ((redSignificants * 100) / redStrikes)|number_format(2, ',') }} %</span>
+                    <span class="col-12 text-muted fs-6">Pourcentage</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-around fs-1 fw-bold">
+                <div class="text-center row">
+                    <span class="col-6 fw-bold fs-2 text-primary">{{ blueTakedowns }}</span>
+                    <span class="col-6 fw-bold fs-2 text-danger">{{ redTakedowns }}</span>
+                    <span class="col-12 text-muted fs-6">Takedowns</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-around fs-1 fw-bold">
+                <div class="text-center row">
+                    <span class="col-12 fw-bold text-primary">{{ blueScore}}</span>
+                    <span class="col-12 text-muted fs-6">Score coin bleu</span>
+                </div>
+
+                <div class="text-center row">
+                    <span class="col-12 fw-bold text-danger">{{ redScore }}</span>
+                    <span class="col-12 text-muted fs-6">Score coin rouge</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center text-decoration-underline">Analyses par round</h2>
+    <div class="row text-center gy-5">
+        <div class="col-sm-12 col-md-6 offset-md-3">
+            <canvas id="fightScoresChart"></canvas>
+            <h1 class="fs-5">Analyse des scores</h1>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <canvas id="fightStrikesChart"></canvas>
+            <h1 class="fs-5">Analyse des frappes</h1>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <canvas id="fightSignificantsChart"></canvas>
+            <h1 class="fs-5">Analyse des frappes significatives</h1>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <canvas id="fightBlueSignificantOverStrikesChart"></canvas>
+            <h1 class="fs-5">Analyse de l'efficacité de frappes</h1>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <canvas id="fightRedSignificantOverStrikesChart"></canvas>
+            <h1 class="fs-5">Analyse de l'efficacité de frappes</h1>
+        </div>
+        
+        <div class="col-sm-12 col-md-6 offset-md-3">
+            <canvas id="fightTakedownsChart"></canvas>
+            <h1 class="fs-5">Analyse des takedowns</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/chartjs/chart.min.js') }}"></script>
+    <script type="text/javascript">
+        let ScoresChart = new Chart(
+            document.getElementById('fightScoresChart').getContext("2d"),
+            scoresConfig = {
+                type: 'bar',
+                data: {
+                    labels: ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
+                    datasets: [
+                        {
+                            label: '{{ fight.blueFighterMen }}',
+                            data: [ {{ blueScoreArray[0] ~  ', ' ~ blueScoreArray[1] ~ ', ' ~ blueScoreArray[2] ~ ', ' ~ blueScoreArray[3] ~ ', ' ~ blueScoreArray[4] }} ],
+
+                            backgroundColor: 'rgb(54, 162, 235)',
+                            borderColor: 'rgba(54, 162, 235, 0.2)'
+                        },
+                        {
+                            label: '{{ fight.redFighterMen }}',
+                            data: [ {{ redScoreArray[0] ~  ', ' ~ redScoreArray[1] ~ ', ' ~ redScoreArray[2] ~ ', ' ~ redScoreArray[3] ~ ', ' ~ redScoreArray[4] }} ],
+                            backgroundColor : 'rgb(255, 99, 132)',
+                            borderColor : 'rgba(255, 99, 132, 0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                        }
+                    }
+                },
+            }
+        );
+
+        let StrikesChart = new Chart(
+            document.getElementById('fightStrikesChart').getContext("2d"),
+            strikesConfig = {
+                type: 'bar',
+                data: {
+                    labels: ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
+                    datasets: [
+                        {
+                            label: '{{ fight.blueFighterMen }}',
+                            data: [ {{ blueStrikesArray[0] ~  ', ' ~ blueStrikesArray[1] ~ ', ' ~ blueStrikesArray[2] ~ ', ' ~ blueStrikesArray[3] ~ ', ' ~ blueStrikesArray[4] }} ],
+                            backgroundColor: 'rgb(54, 162, 235)',
+                            borderColor: 'rgba(54, 162, 235, 0.2)'
+                        },
+                        {
+                            label: '{{ fight.redFighterMen }}',
+                            data: [ {{ redStrikesArray[0] ~  ', ' ~ redStrikesArray[1] ~ ', ' ~ redStrikesArray[2] ~ ', ' ~ redStrikesArray[3] ~ ', ' ~ redStrikesArray[4] }} ],
+                            backgroundColor : 'rgb(255, 99, 132)',
+                            borderColor : 'rgba(255, 99, 132, 0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                        }
+                    }
+                },
+            }
+        );
+
+        let SignificantChart = new Chart(
+            document.getElementById('fightSignificantsChart').getContext("2d"),
+            significantStrikesConfig = {
+                type: 'bar',
+                data: {
+                    labels: ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
+                    datasets: [
+                        {
+                            label: '{{ fight.blueFighterMen }}',
+                            data: [ {{ blueSignificantsArray[0] ~  ', ' ~ blueSignificantsArray[1] ~ ', ' ~ blueSignificantsArray[2] ~ ', ' ~ blueSignificantsArray[3] ~ ', ' ~ blueSignificantsArray[4] }} ],
+                            backgroundColor: 'rgb(54, 162, 235)',
+                            borderColor: 'rgba(54, 162, 235, 0.2)'
+                        },
+                        {
+                            label: '{{ fight.redFighterMen }}',
+                            data: [ {{ redSignificantsArray[0] ~  ', ' ~ redSignificantsArray[1] ~ ', ' ~ redSignificantsArray[2] ~ ', ' ~ redSignificantsArray[3] ~ ', ' ~ redSignificantsArray[4] }} ],
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgba(255, 99, 132, 0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                        }
+                    }
+                },
+            }
+        );
+
+        let TakedownsChart = new Chart(
+            document.getElementById('fightTakedownsChart').getContext("2d"),
+            takedownsConfig = {
+                type: 'bar',
+                data: {
+                    labels: ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
+                    datasets: [
+                        {
+                            label: '{{ fight.blueFighterMen }}',
+                            data: [ {{ blueTakedownsArray[0] ~  ', ' ~ blueTakedownsArray[1] ~ ', ' ~ blueTakedownsArray[2] ~ ', ' ~ blueTakedownsArray[3] ~ ', ' ~ blueTakedownsArray[4] }} ],
+                            backgroundColor: 'rgb(54, 162, 235)',
+                            borderColor: 'rgba(54, 162, 235, 0.2)'
+                        },
+                        {
+                            label: '{{ fight.blueFighterMen }}',
+                            data: [ {{ redTakedownsArray[0] ~  ', ' ~ redTakedownsArray[1] ~ ', ' ~ redTakedownsArray[2] ~ ', ' ~ redTakedownsArray[3] ~ ', ' ~ redTakedownsArray[4] }} ],
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgba(255, 99, 132, 0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                        }
+                    }
+                },
+            }
+        );
+
+        let blueSignificantOverStrikesChart = new Chart(
+            document.getElementById('fightBlueSignificantOverStrikesChart').getContext("2d"),
+            strikesOverSignificantsConfig = {
+                type: 'line',
+                data: {
+                    labels: ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
+                    datasets: [
+                        {
+                            label: '{{ fight.blueFighterMen }}' + ' (FSignificatives)',
+                            data: [ {{ blueSignificantsArray[0] ~  ', ' ~ blueSignificantsArray[1] ~ ', ' ~ blueSignificantsArray[2] ~ ', ' ~ blueSignificantsArray[3] ~ ', ' ~ blueSignificantsArray[4] }} ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgb(54, 162, 235)',
+                            stack: 'combined',
+                            type: 'bar'
+                        },
+                        {
+                            label: '{{ fight.blueFighterMen }}' + ' (Frappes)',
+                            data: [ {{ blueStrikesArray[0] ~  ', ' ~ blueStrikesArray[1] ~ ', ' ~ blueStrikesArray[2] ~ ', ' ~ blueStrikesArray[3] ~ ', ' ~ blueStrikesArray[4] }} ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgb(54, 162, 235)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            }
+        );
+
+        let redSignificantOverStrikesChart = new Chart(
+            document.getElementById('fightRedSignificantOverStrikesChart').getContext("2d"),
+            redStrikesOverSignificantsConfig = {
+                type: 'line',
+                data: {
+                    labels: ["Round 1", "Round 2", "Round 3", "Round 4", "Round 5"],
+                    datasets: [
+                        {
+                            label: '{{ fight.redFighterMen }}' + ' (FSignificatives)',
+                            data: [ {{ redSignificantsArray[0] ~  ', ' ~ redSignificantsArray[1] ~ ', ' ~ redSignificantsArray[2] ~ ', ' ~ redSignificantsArray[3] ~ ', ' ~ redSignificantsArray[4] }} ],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            stack: 'combined',
+                            type: 'bar'
+                        },
+                        {
+                            label: '{{ fight.redFighterMen }}' + ' (Frappes)',
+                            data: [ {{ redStrikesArray[0] ~  ', ' ~ redStrikesArray[1] ~ ', ' ~ redStrikesArray[2] ~ ', ' ~ redStrikesArray[3] ~ ', ' ~ redStrikesArray[4] }} ],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            }
+        );
+    </script>
+{% endblock %}
+
+

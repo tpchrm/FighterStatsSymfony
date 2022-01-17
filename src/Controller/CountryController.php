@@ -13,7 +13,7 @@ class CountryController extends AbstractController
     /**
      * @Route("/country", name="country")
      */
-    public function generateCountry(ManagerRegistry $managerRegistry): Response
+    public function readCountry(ManagerRegistry $managerRegistry): Response
     {
         $repository = $managerRegistry->getRepository(Country::class);
         $countries = $repository->findAll();

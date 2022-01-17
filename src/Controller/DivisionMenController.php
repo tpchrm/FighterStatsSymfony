@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class DivisionMenController extends AbstractController
 {
     /**
-     * @Route("/division/men/generate", name="division_men_generate")
+     * @Route("/division/men", name="division_men")
      */
-    public function addDivisionMen(ManagerRegistry $doctrine): Response
+    public function readDivisionMen(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(DivisionMen::class);
 

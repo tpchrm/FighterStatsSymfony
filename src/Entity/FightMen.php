@@ -133,14 +133,4 @@ class FightMen
 
         return $this;
     }
-
-//    public function __toString()
-//    {
-//        $chaine = "";
-//
-//        foreach ( as round) {
-//
-//    }
-//        return $chaine;
-//    }
 }
