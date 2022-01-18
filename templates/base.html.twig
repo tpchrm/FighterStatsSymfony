@@ -19,9 +19,9 @@
             <a class="text-decoration-none" href="{{ path('main_menu')   }}">
                 <img src="{{  asset('assets/images/assets/favicon.png') }}" alt="Logo" style="width: 32px">
             </a>
-            FightersStats™ -
+            FightersStats™
             {% if app.user %}
-            <span class="text-danger">Connecté(e) en tant que "{{ app.user.username }}"</span>
+            -<span class="text-danger"> {{ app.user.username }}</span>
             {% endif %}
         </span>
             <div>
