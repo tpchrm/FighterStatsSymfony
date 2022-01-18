@@ -6,12 +6,18 @@
 
 {% block body %}
     <div class="row py-3">
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="col-10">
             <h1 class="fw-bold text-center">Liste de tous les combattants</h1>
         </div>
         <div class="d-flex align-items-center col-2">
             <a class="btn btn-secondary" href="{{ path('fighter_men_add') }}">Ajouter un combattant</a>
         </div>
+        {% else %}
+            <div class="col-12">
+                <h1 class="fw-bold text-center">Liste de tous les combattants</h1>
+            </div>
+        {% endif %}
     </div>
     <table class="table table-dark table-bordered table-striped table-hover text-center">
         <thead>
@@ -26,11 +32,17 @@
             <tr>
                 <td>{{ fighter_men.lastname }}</td>
                 <td>{{ fighter_men.firstname }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>
                     <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
                     <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
                     <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
                 </td>
+                {% else %}
+                    <td>
+                        <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
