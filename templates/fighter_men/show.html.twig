@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block navlink %}
+    <a class="btn btn-outline-danger rounded-pill" href="{{ path('fighter_men') }}">Retour liste</a>
+{% endblock %}
+
 {% block body %}
     <div class="d-flex row justify-content-evenly">
         <div class="d-flex flex-column col-md-6 col-sm-12 align-items-center p-2">
             <div class="d-flex justify-content-center col-md-6 py-3">
-                <img src="{{ asset('assets/images/fighters/'~ fighter_men_show.firstname ~ fighter_men_show.lastname ~'.png') }}" class="img-fluid w-75">
+                <img src="{{ asset('assets/images/fighters/' ~ fighter_men_show.firstname|replace({' ': ''})|lower ~ fighter_men_show.lastname|replace({' ': ''})|lower ~ '.png') }}" class="img-fluid w-75">
             </div>
             <div class="col-md-6 col-sm-12 py-3 text-center">
                 <span class="fw-bold fs-2">{{ fighter_men_show.firstname }} {{ fighter_men_show.lastname }}</span>

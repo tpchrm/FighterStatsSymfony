@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="py-2">
-        <h1>Liste des derniers combats <a class="btn btn-secondary" href="{{ path('fight_list') }}">Programmer un combat</a></h1>
+        <h1>Liste des derniers combats <a class="btn btn-secondary float-md-end" href="{{ path('fight_list') }}">Lister tout les combats</a></h1>
 
         {% if lastFights is empty %}
             <div class="alert alert-warning text-center">
@@ -40,39 +40,224 @@
     </div>
 
     <div class="py-2">
-        <h1>Liste des derniers combattants <a class="btn btn-secondary" href="{{ path('fighter_men_add') }}">Ajouter un combattant</a></h1>
-
-        {% if lastFighters is empty %}
-            <div class="alert alert-warning text-center">
-                Aucun combattant n'a été ajouté pour le moment.
+        <h1>Top 5 des divisions <a class="btn btn-secondary  float-md-end" href="{{ path('fighter_men') }}">Lister tout les combattants</a> </h1>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Flyweight - Poids Mouches</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topFLW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        {% endif %}
-
-        <table class="table table-dark table-bordered table-striped table-hover text-center">
-            <thead>
-            <tr>
-                <td>Nom</td>
-                <td>Prénom</td>
-                <td>Origine</td>
-                <td>Division</td>
-                <td>Détails</td>
-            </tr>
-            </thead>
-            <tbody>
-            {% for fighter_men in lastFighters %}
-                <tr>
-                    <td>{{ fighter_men.lastname }}</td>
-                    <td>{{ fighter_men.firstname }}</td>
-                    <td>{{ fighter_men.origin }}</td>
-                    <td>{{ fighter_men.division.divisionEng }}</td>
-                    <td>
-                        <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
-                        <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
-                        <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Bantamweight - Poids Coqs</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topBW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Featherweight - Poids Plumes</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topFTW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Lighweight - Poids Légers</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topLW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Welterweight - Poids Mi-Moyen</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topWW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Middleweight - Poids Moyens</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topBW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Light Heavyweight - Poids Lourds-Légers</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topLHW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <table class="table table-dark table-bordered table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <td colspan="4">Heavyweight - Poids Lours</td>
+                    </tr>
+                    <tr>
+                        <td>Nom</td>
+                        <td>Prénom</td>
+                        <td>Victoires</td>
+                        <td>Détails</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fighter in topHW %}
+                        <tr>
+                            <td>{{ fighter.lastname }}</td>
+                            <td>{{ fighter.firstname }}</td>
+                            <td>{{ fighter.wins }}</td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter.id}) }}">Voir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}

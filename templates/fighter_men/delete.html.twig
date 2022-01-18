@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block navlink %}
+    <a class="btn btn-outline-danger rounded-pill" href="{{ path('fighter_men_show', {'id': fighter_men_delete.vars.value.id }) }}">Retour combattant</a>
+    <a class="btn btn-outline-danger rounded-pill" href="{{ path('fighter_men') }}">Retour liste</a>
+{% endblock %}
+
 {% block body %}
     <h1 class="text-center">Suppression d'un Combattant</h1>
 
