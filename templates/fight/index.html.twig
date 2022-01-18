@@ -8,15 +8,15 @@
     {% if is_granted('ROLE_ADMIN') %}
     <div class="py-2">
         <h1>Simuler un combat</h1>
-        <div class="d-flex justify-content-around">
-            <a href="{{ path('fight_new', {'division_eng': 'Flyweight'}) }}" class="btn btn-danger">Poids Mouches</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Bantamweight'}) }}" class="btn btn-danger">Poids Coqs</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Featherweight'}) }}" class="btn btn-danger">Poids Plumes</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Lightweight'}) }}" class="btn btn-danger">Poids Légers</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Welterweight'}) }}" class="btn btn-danger">Poids Mi-Moyens</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Middleweight'}) }}" class="btn btn-danger">Poids Moyens</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Light Heavyweight'}) }}" class="btn btn-danger">Poids Lourds-Légers</a>
-            <a href="{{ path('fight_new', {'division_eng': 'Heavyweight'}) }}" class="btn btn-danger">Poids Lourds</a>
+        <div class="d-md-flex justify-content-md-around">
+            <a href="{{ path('fight_new', {'division_eng': 'Flyweight'}) }}" class="btn btn-danger">Mouches</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Bantamweight'}) }}" class="btn btn-danger">Coqs</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Featherweight'}) }}" class="btn btn-danger">Plumes</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Lightweight'}) }}" class="btn btn-danger">Légers</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Welterweight'}) }}" class="btn btn-danger">Mi-Moyens</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Middleweight'}) }}" class="btn btn-danger">Moyens</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Light Heavyweight'}) }}" class="btn btn-danger">Lourds-Légers</a>
+            <a href="{{ path('fight_new', {'division_eng': 'Heavyweight'}) }}" class="btn btn-danger">Lourds</a>
         </div>
     </div>
     {% endif %}
