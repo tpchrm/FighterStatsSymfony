@@ -19,6 +19,18 @@ class FighterMenRepository extends ServiceEntityRepository
         parent::__construct($registry, FighterMen::class);
     }
 
+    public function getTop5Fighters($division)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.division = :val')
+            ->setParameter('val', $division)
+            ->orderBy('f.wins', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return FighterMen[] Returns an array of FighterMen objects
     //  */

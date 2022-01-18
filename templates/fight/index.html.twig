@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block navlink %}
+    <a class="btn btn-outline-danger rounded-pill" href="{{ path('main_menu') }}">Retour menu</a>
+{% endblock %}
+
 {% block body %}
     <div class="py-2">
         <h1>Simuler un combat</h1>

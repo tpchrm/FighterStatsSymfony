@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block navlink %}
+    <a class="btn btn-outline-danger rounded-pill" href="{{ path('main_menu') }}">Retour menu</a>
+{% endblock %}
+
 {% block body %}
     <div class="row py-3">
         <div class="col-10">
