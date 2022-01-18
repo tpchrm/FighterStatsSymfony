@@ -55,6 +55,34 @@ class GeneratorController extends AbstractController
             $entityManager->persist($fighter);
         }
 
+        $bantamweight_countries = ['États-Unis', 'Russie', 'États-Unis', 'Brésil', 'États-Unis', 'États-Unis', 'Géorgie', 'États-Unis', 'Équateur', 'Brésil', 'Brésil', 'États-Unis', 'États-Unis', 'États-Unis', 'Chine', 'Brésil'];
+
+        $bantamweight_fighter_firstnames = ['Aljamain', 'Petr', 'TJ', 'José', 'Cory', 'Rob', 'Merab', 'Dominick', 'Marlon', 'Marlon', 'Pedro', 'Frankie', 'Sean', 'Ricky', 'Song', 'Raphael'];
+        $bantamweight_fighter_lastnames = ['Sterling', 'Yan', 'Dillashaw', 'Aldo', 'Sandhagen', 'Font', 'Dvalishvili', 'Cruz', 'Vera', 'Moraes', 'Munhoz', 'Edgar', 'O Malley', 'Simon', 'Yadong', 'Assuncao'];
+        $bantamweight_fighter_weights = [134.50, 135.00, 135.00, 135.00, 135.00, 135.00, 135.00, 135.00, 135.00, 135.00, 135.00, 135.60, 135.00, 135.00, 135.00, 135.00];
+        $bantamweight_fighter_heights = [67.00, 67.50, 66.50, 67.00, 71.00, 71.50, 66.00, 68.00, 68.00, 66.00, 66.00, 68.00, 71.00, 66.00, 68.00, 66.50];
+
+        for ($i = 0; $i < sizeof($bantamweight_fighter_firstnames); $i++) {
+            $fighter = new FighterMen();
+
+            $repository= $managerRegistry->getRepository(DivisionMen::class);
+            $division = $repository->findOneBy(['division_eng' => 'Bantamweight']);
+            $fighter->setDivision($division);
+
+            $repository= $managerRegistry->getRepository(Country::class);
+            $origin = $repository->findOneBy( ['name' => $bantamweight_countries[$i]]);
+            $fighter->setOrigin($origin);
+
+            $fighter->setFirstname($bantamweight_fighter_firstnames[$i]);
+            $fighter->setLastname($bantamweight_fighter_lastnames[$i]);
+            $fighter->setWeight($bantamweight_fighter_weights[$i]);
+            $fighter->setHeight($bantamweight_fighter_heights[$i]);
+            $fighter->setWins(0);
+
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->persist($fighter);
+        }
+
         $featherweight_countries = ['Australie', 'États-Unis', 'États-Unis', 'Mexique', 'Corée du Sud', 'États-Unis', 'Royaume-Uni', 'États-Unis', 'Géorgie', 'États-Unis', 'Brésil', 'États-Unis', 'Nigéria', 'Russie', 'États-Unis', 'États-Unis'];
 
         $featherweight_fighter_firstnames = ['Alexander', 'Max', 'Brian', 'Yair', 'Chan Sung', 'Calvin', 'Arnold', 'Josh', 'Giga', 'Dan', 'Edson', 'Bryce', 'Sodiq', 'Movsar', 'Shane', 'Alex'];
