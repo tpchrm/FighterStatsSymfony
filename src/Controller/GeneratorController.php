@@ -139,12 +139,12 @@ class GeneratorController extends AbstractController
             $entityManager->persist($fighter);
         }
 
-        $welterweight_countries = ['Nigéria', 'États-Unis', 'Brésil', 'Jamaïque', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'Suède', 'États-Unis', 'Chine', 'Argentine'];
+        $welterweight_countries = ['Nigéria', 'États-Unis', 'Brésil', 'Jamaïque', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'Suède', 'États-Unis', 'Chine', 'Argentine', 'Russie'];
 
-        $welterweight_fighter_firstnames = ['Kamaru', 'Colby', 'Gilbert', 'Leon', 'Vicente', 'Belal', 'Jorge', 'Stephen', 'Neil', 'Sean', 'Michael', 'Khamzat', 'Geoff', 'Li', 'Santiago'];
-        $welterweight_fighter_lastnames = ['Usman', 'Covington', 'Burns', 'Edwards', 'Luque', 'Muhammad', 'Masvidal', 'Thompson', 'Magny', 'Brady', 'Chiesa', 'Chimaev', 'Neal', 'Jingliang', 'Ponzinibbio'];
-        $welterweight_fighter_weights = [169.00, 169.40, 155.00, 170.00, 170.00, 170.00, 156.00, 170.00, 170.00, 170.00, 170.50, 186.60, 171.00, 170.00, 171.00, 170.00];
-        $welterweight_fighter_heights = [72.00, 71.00, 70.00, 72.00, 71.00, 71.00, 71.00, 72.00, 75.00, 70.00, 73.00, 74.00, 71.00, 72.00, 72.00];
+        $welterweight_fighter_firstnames = ['Kamaru', 'Colby', 'Gilbert', 'Leon', 'Vicente', 'Belal', 'Jorge', 'Stephen', 'Neil', 'Sean', 'Michael', 'Khamzat', 'Geoff', 'Li', 'Santiago', 'Muslim'];
+        $welterweight_fighter_lastnames = ['Usman', 'Covington', 'Burns', 'Edwards', 'Luque', 'Muhammad', 'Masvidal', 'Thompson', 'Magny', 'Brady', 'Chiesa', 'Chimaev', 'Neal', 'Jingliang', 'Ponzinibbio', 'Salikhov'];
+        $welterweight_fighter_weights = [169.00, 169.40, 155.00, 170.00, 170.00, 170.00, 156.00, 170.00, 170.00, 170.00, 170.50, 186.60, 171.00, 170.00, 171.00, 170.00, 170.00];
+        $welterweight_fighter_heights = [72.00, 71.00, 70.00, 72.00, 71.00, 71.00, 71.00, 72.00, 75.00, 70.00, 73.00, 74.00, 71.00, 72.00, 72.00, 71.00];
 
         for ($i = 0; $i < sizeof($welterweight_fighter_firstnames); $i++) {
             $fighter = new FighterMen();
