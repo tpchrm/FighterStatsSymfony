@@ -167,6 +167,62 @@ class GeneratorController extends AbstractController
             $entityManager->persist($fighter);
         }
 
+        $middleweight_countries = ['Nigéria', 'Australie', 'Italie', 'États-Unis', 'États-Unis', 'Brésil','Norvège', 'États-Unis','Royaume-Uni', 'Jamaïque', 'États-Unis', 'États-Unis', 'Russie', 'Brésil', 'États-Unis', 'États-Unis'];
+
+        $middleweight_fighter_firstnames = ['Israel', 'Robert', 'Marvin','Jared', 'Derek', 'Paulo', 'Jack', 'Sean', 'Darren', 'Uriah', 'Kelvin', 'Brad', 'Nassourdine', 'Andre', 'Kevin', 'Chris'];
+        $middleweight_fighter_lastnames = ['Adesanya', 'Whittaker', 'Vettori','Cannonier', 'Brunson', 'Costa','Hermansson', 'Strickland', 'Till', 'Hall', 'Gastelum', 'Tavares', 'Imavov', 'Muniz', 'Holland', 'Weidman'];
+        $middleweight_fighter_weights = [185.00, 185.00, 185.00, 185.00, 218.40, 186.00, 186.00, 170.00, 185.00, 185.00, 185.00, 185.00, 184.60, 186.00, 185.00, 186.00];
+        $middleweight_fighter_heights = [76.00, 72.00, 71.00, 73.00, 73.00, 71.00, 73.00, 73.00, 72.00, 72.00, 69.00, 73.00, 75.00, 73.00, 75.00, 74.00];
+
+        for ($i = 0; $i < sizeof($middleweight_fighter_firstnames); $i++) {
+            $fighter = new FighterMen();
+
+            $repository= $managerRegistry->getRepository(DivisionMen::class);
+            $division = $repository->findOneBy(['division_eng' => 'Middleweight']);
+            $fighter->setDivision($division);
+
+            $repository= $managerRegistry->getRepository(Country::class);
+            $origin = $repository->findOneBy( ['name' => $middleweight_countries[$i]]);
+            $fighter->setOrigin($origin);
+
+            $fighter->setFirstname($middleweight_fighter_firstnames[$i]);
+            $fighter->setLastname($middleweight_fighter_lastnames[$i]);
+            $fighter->setWeight($middleweight_fighter_weights[$i]);
+            $fighter->setHeight($middleweight_fighter_heights[$i]);
+            $fighter->setWins(0);
+
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->persist($fighter);
+        }
+
+        $lightheavyweight_countries = ['Brésil','Pologne', 'République Tchèque','Serbie', 'États-Unis', 'Brésil', 'Russie', 'États-Unis', 'Suisse', 'Ukraine', 'Brésil', 'Royaume-Uni', 'États-Unis', 'États-Unis', 'Australie', 'Moldavie'];
+
+        $lightheavyweight_fighter_firstnames = ['Glover', 'Jan','jiri', 'Aleksandar','Anthony', 'Thiago', 'Magomed', 'Dominick', 'Volkan', 'Nikita', 'Johnny', 'Paul', 'Jamahal', 'Ryan', 'Jimmy', 'Ion'];
+        $lightheavyweight_fighter_lastnames = ['Texeira', 'Blachowicz','Prochazka', 'Rakic','Smith', 'Santos', 'Ankalaev','Reyes', 'Oezdemir', 'Krylov', 'Walker', 'Craig', 'Hill', 'Spann', 'Crute', 'Cutelaba'];
+        $lightheavyweight_fighter_weights = [205.00, 205.00, 205.00, 206.00, 205.50, 206.00, 205.50, 205.00, 205.50, 205.00, 204.50, 205.00, 205.50, 223.20, 205.00, 211.20];
+        $lightheavyweight_fighter_heights = [74.00, 74.00, 75.00, 76.00, 76.00, 74.00, 75.00, 76.00, 74.00, 75.00, 78.00, 75.50, 76.00, 77.00, 74.00, 73.00];
+
+        for ($i = 0; $i < sizeof($lightheavyweight_fighter_firstnames); $i++) {
+            $fighter = new FighterMen();
+
+            $repository= $managerRegistry->getRepository(DivisionMen::class);
+            $division = $repository->findOneBy(['division_eng' => 'Light Heavyweight']);
+            $fighter->setDivision($division);
+
+            $repository= $managerRegistry->getRepository(Country::class);
+            $origin = $repository->findOneBy( ['name' => $lightheavyweight_countries[$i]]);
+            $fighter->setOrigin($origin);
+
+            $fighter->setFirstname($lightheavyweight_fighter_firstnames[$i]);
+            $fighter->setLastname($lightheavyweight_fighter_lastnames[$i]);
+            $fighter->setWeight($lightheavyweight_fighter_weights[$i]);
+            $fighter->setHeight($lightheavyweight_fighter_heights[$i]);
+            $fighter->setWins(0);
+
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->persist($fighter);
+        }
+
         $entityManager->flush();
 
         return $this->redirectToRoute('success');
@@ -199,7 +255,7 @@ class GeneratorController extends AbstractController
     public function generator_country(ManagerRegistry $managerRegistry): Response
     {
         //À commenter pour ne pas ajouter de doublons dans la base
-        $countries_array = [ "Afrique du Sud", "Algérie", "Allemagne", "Arabie Saoudite", "Argentine", "Australie", "Autriche", "Belgique", "Brésil", "Bulgarie", "Cameroun", "Canada", "Chili", "Chine", "Colombie", "Corée du Sud", "Croatie", "Danemark", "Égypte", "Émirats Arabes Unis", "Équateur", "Espagne", "États-Unis", "Finlande", "France", "Géorgie", "Grèce", "Hongrie", "Inde", "Iran", "Iraq", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Kazakhstan", "Maroc", "Mexique", "Moldavie", "Nigéria", "Norvège", "Nouvelle-Zélande", "Paraguay", "Pays-Bas", "Pérou", "Pologne", "Portugal", "Quatar", "République Démocratique du Congo", "République Tchèque", "Réunion", "Roumanie", "Royaume-Uni", "Russie", "Singapour", "Slovaquie", "Slovénie", "Somalie", "Soudan", "Suède", "Suisse", "Thaïlande", "Tunisie", "Turquie", "Ukraine", "Uruguay" ];
+        $countries_array = [ "Afrique du Sud", "Algérie", "Allemagne", "Arabie Saoudite", "Argentine", "Australie", "Autriche", "Belgique", "Brésil", "Bulgarie", "Cameroun", "Canada", "Chili", "Chine", "Colombie", "Corée du Sud", "Croatie", "Danemark", "Égypte", "Émirats Arabes Unis", "Équateur", "Espagne", "États-Unis", "Finlande", "France", "Géorgie", "Grèce", "Hongrie", "Inde", "Iran", "Iraq", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Kazakhstan", "Maroc", "Mexique", "Moldavie", "Nigéria", "Norvège", "Nouvelle-Zélande", "Paraguay", "Pays-Bas", "Pérou", "Pologne", "Portugal", "Quatar", "République Démocratique du Congo", "République Tchèque", "Réunion", "Roumanie", "Royaume-Uni", "Russie", "Serbie","Singapour", "Slovaquie", "Slovénie", "Somalie", "Soudan", "Suède", "Suisse", "Thaïlande", "Tunisie", "Turquie", "Ukraine", "Uruguay" ];
 
         foreach ($countries_array as $name) {
             $country = new Country();
