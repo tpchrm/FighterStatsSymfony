@@ -111,6 +111,62 @@ class GeneratorController extends AbstractController
             $entityManager->persist($fighter);
         }
 
+        $lightweight_countries = ['Brésil', 'États-Unis', 'États-Unis', 'Iran', 'Russie', 'États-Unis', 'Brésil', 'États-Unis', 'Nouvelle-Zélande', 'Irlande', 'États-Unis', 'Kazakhstan', 'Pologne', 'Géorgie', 'Nouvelle-Zélande', 'Brésil'];
+
+        $lightweight_fighter_firstnames = ['Charles', 'Justin', 'Dustin', 'Beneil', 'Islam', 'Michael', 'Rafael', 'Tony', 'Dan', 'Conor', 'Gregor', 'Rafael', 'Mateusz', 'Arman', 'Brad', 'Diego'];
+        $lightweight_fighter_lastnames = ['Oliveira', 'Gaethje', 'Poirier', 'Dariush', 'Makhachev', 'Chandler', 'Dos Anjos', 'Ferguson', 'Hooker', 'Mcgregor', 'Gillespie', 'Fiziev', 'Gamrot', 'Tsarukyan', 'Riddell', 'Ferreira'];
+        $lightweight_fighter_weights = [155.00, 155.60, 154.50, 155.00, 155.50, 155.20, 155.00, 155.0, 156.00, 145.00, 155.00, 155.00, 155.00, 169.40, 155.00, 155.00];
+        $lightweight_fighter_heights = [70.00, 71.00, 69.00, 70.00, 70.00, 68.00, 68.00, 71.00, 72.00, 69.00, 67,00, 68.00, 70.00, 67.00, 67.00, 69.00];
+
+        for ($i = 0; $i < sizeof($lightweight_fighter_firstnames); $i++) {
+            $fighter = new FighterMen();
+
+            $repository= $managerRegistry->getRepository(DivisionMen::class);
+            $division = $repository->findOneBy(['division_eng' => 'Lightweight']);
+            $fighter->setDivision($division);
+
+            $repository= $managerRegistry->getRepository(Country::class);
+            $origin = $repository->findOneBy( ['name' => $lightweight_countries[$i]]);
+            $fighter->setOrigin($origin);
+
+            $fighter->setFirstname($lightweight_fighter_firstnames[$i]);
+            $fighter->setLastname($lightweight_fighter_lastnames[$i]);
+            $fighter->setWeight($lightweight_fighter_weights[$i]);
+            $fighter->setHeight($lightweight_fighter_heights[$i]);
+            $fighter->setWins(0);
+
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->persist($fighter);
+        }
+
+        $welterweight_countries = ['Nigéria', 'États-Unis', 'Brésil', 'Jamaïque', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'États-Unis', 'Suède', 'États-Unis', 'Chine', 'Argentine'];
+
+        $welterweight_fighter_firstnames = ['Kamaru', 'Colby', 'Gilbert', 'Leon', 'Vicente', 'Belal', 'Jorge', 'Stephen', 'Neil', 'Sean', 'Michael', 'Khamzat', 'Geoff', 'Li', 'Santiago'];
+        $welterweight_fighter_lastnames = ['Usman', 'Covington', 'Burns', 'Edwards', 'Luque', 'Muhammad', 'Masvidal', 'Thompson', 'Magny', 'Brady', 'Chiesa', 'Chimaev', 'Neal', 'Jingliang', 'Ponzinibbio'];
+        $welterweight_fighter_weights = [169.00, 169.40, 155.00, 170.00, 170.00, 170.00, 156.00, 170.00, 170.00, 170.00, 170.50, 186.60, 171.00, 170.00, 171.00, 170.00];
+        $welterweight_fighter_heights = [72.00, 71.00, 70.00, 72.00, 71.00, 71.00, 71.00, 72.00, 75.00, 70.00, 73.00, 74.00, 71.00, 72.00, 72.00];
+
+        for ($i = 0; $i < sizeof($welterweight_fighter_firstnames); $i++) {
+            $fighter = new FighterMen();
+
+            $repository= $managerRegistry->getRepository(DivisionMen::class);
+            $division = $repository->findOneBy(['division_eng' => 'Welterweight']);
+            $fighter->setDivision($division);
+
+            $repository= $managerRegistry->getRepository(Country::class);
+            $origin = $repository->findOneBy( ['name' => $welterweight_countries[$i]]);
+            $fighter->setOrigin($origin);
+
+            $fighter->setFirstname($welterweight_fighter_firstnames[$i]);
+            $fighter->setLastname($welterweight_fighter_lastnames[$i]);
+            $fighter->setWeight($welterweight_fighter_weights[$i]);
+            $fighter->setHeight($welterweight_fighter_heights[$i]);
+            $fighter->setWins(0);
+
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->persist($fighter);
+        }
+
         $entityManager->flush();
 
         return $this->redirectToRoute('success');
