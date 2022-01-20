@@ -223,6 +223,34 @@ class GeneratorController extends AbstractController
             $entityManager->persist($fighter);
         }
 
+        $heavyweight_countries = ['Cameroun', 'France', 'États-Unis', 'États-Unis', 'États-Unis', 'Russie', 'Surinam', 'États-Unis','Russie', 'Pologne', 'Royaume-Uni', 'Australie', 'Brésil', 'Bulgarie', 'États-Unis', 'Russie'];
+
+        $heavyweight_fighter_firstnames = ['Francis', 'Ciryl', 'Stipe', 'Derrick', 'Curtis', 'Alexander', 'Jairzinho', 'Chris', 'Shamil', 'Marcin', 'Tom', 'Tai', 'Augusto', 'Blagoy', 'Walt', 'Sergei'];
+        $heavyweight_fighter_lastnames = ['Ngannou', 'Gane', 'Miocic', 'Lewis', 'Blaydes', 'Volkov', 'Rozenstruik', 'Dakhaus', 'Abdurakhimov', 'Tybura', 'Aspinall', 'Tuivasa','Sakai', 'Ivanov', 'Harris', 'Pavlovich'];
+        $heavyweight_fighter_weights = [250.00, 245.00, 240.00, 265.00, 265.00, 263.00, 242.00, 250.00, 235.00, 249.00, 245.00, 264.00, 265.00, 250.00, 250.00, 257.00];
+        $heavyweight_fighter_heights = [76.00, 76.00, 77.00, 75.00, 76.00, 79.00, 74.00, 75.00, 75.00, 75.00, 77.00, 74.00, 75.00, 71.00, 77.00, 75.00];
+
+        for ($i = 0; $i < sizeof($heavyweight_fighter_firstnames); $i++) {
+            $fighter = new FighterMen();
+
+            $repository= $managerRegistry->getRepository(DivisionMen::class);
+            $division = $repository->findOneBy(['division_eng' => 'Heavyweight']);
+            $fighter->setDivision($division);
+
+            $repository= $managerRegistry->getRepository(Country::class);
+            $origin = $repository->findOneBy( ['name' => $heavyweight_countries[$i]]);
+            $fighter->setOrigin($origin);
+
+            $fighter->setFirstname($heavyweight_fighter_firstnames[$i]);
+            $fighter->setLastname($heavyweight_fighter_lastnames[$i]);
+            $fighter->setWeight($heavyweight_fighter_weights[$i]);
+            $fighter->setHeight($heavyweight_fighter_heights[$i]);
+            $fighter->setWins(0);
+
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->persist($fighter);
+        }
+
         $entityManager->flush();
 
         return $this->redirectToRoute('success');
@@ -255,7 +283,7 @@ class GeneratorController extends AbstractController
     public function generator_country(ManagerRegistry $managerRegistry): Response
     {
         //À commenter pour ne pas ajouter de doublons dans la base
-        $countries_array = [ "Afrique du Sud", "Algérie", "Allemagne", "Arabie Saoudite", "Argentine", "Australie", "Autriche", "Belgique", "Brésil", "Bulgarie", "Cameroun", "Canada", "Chili", "Chine", "Colombie", "Corée du Sud", "Croatie", "Danemark", "Égypte", "Émirats Arabes Unis", "Équateur", "Espagne", "États-Unis", "Finlande", "France", "Géorgie", "Grèce", "Hongrie", "Inde", "Iran", "Iraq", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Kazakhstan", "Maroc", "Mexique", "Moldavie", "Nigéria", "Norvège", "Nouvelle-Zélande", "Paraguay", "Pays-Bas", "Pérou", "Pologne", "Portugal", "Quatar", "République Démocratique du Congo", "République Tchèque", "Réunion", "Roumanie", "Royaume-Uni", "Russie", "Serbie","Singapour", "Slovaquie", "Slovénie", "Somalie", "Soudan", "Suède", "Suisse", "Thaïlande", "Tunisie", "Turquie", "Ukraine", "Uruguay" ];
+        $countries_array = [ "Afrique du Sud", "Algérie", "Allemagne", "Arabie Saoudite", "Argentine", "Australie", "Autriche", "Belgique", "Brésil", "Bulgarie", "Cameroun", "Canada", "Chili", "Chine", "Colombie", "Corée du Sud", "Croatie", "Danemark", "Égypte", "Émirats Arabes Unis", "Équateur", "Espagne", "États-Unis", "Finlande", "France", "Géorgie", "Grèce", "Hongrie", "Inde", "Iran", "Iraq", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", "Kazakhstan", "Maroc", "Mexique", "Moldavie", "Nigéria", "Norvège", "Nouvelle-Zélande", "Paraguay", "Pays-Bas", "Pérou", "Pologne", "Portugal", "Quatar", "République Démocratique du Congo", "République Tchèque", "Réunion", "Roumanie", "Royaume-Uni", "Russie", "Serbie","Singapour", "Slovaquie", "Slovénie", "Somalie", "Soudan", "Suède", "Suisse", "Surinam", "Thaïlande", "Tunisie", "Turquie", "Ukraine", "Uruguay" ];
 
         foreach ($countries_array as $name) {
             $country = new Country();
