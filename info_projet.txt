@@ -1,0 +1,48 @@
+//----------------------------------------------------------------------------------\\
+	FighterStats Symfony - Dylanl Morel / Thomas Epicharme - CDA5 - 20/01/2022	
+\\----------------------------------------------------------------------------------//
+			Résumé du projet			
+//----------------------------------------------------------------------------------\\
+FigtherStat™ est une plateforme de simulation et d'analyse de combat de MMA.
+
+Elle permet de gérer des combattants que l'on peut ajouter depuis la platefome.
+
+
+Les utilisateurs, combattants, les rounds et les combats sont stockés dans une base de données et
+ sont représentés par des entités Symfony.  
+-----------------------------------------------------------------
+1 . Connexion utilisateur :
+---------------------------
+L'utilisateur peut s'inscrire sur la plateforme en remplissant un
+formulaire HTML.
+
+Une fois l'utilisateur inscrit, celui-ci peut se connecter via un
+formulaire similaire.
+
+2 . Module du projet : 
+/!\ Les administrateurs ont accès a toutes les fonctionnalités, les utilisateurs ont uniquement le droit de lecture
+---------------------
+Une fois connecté, l'utilisateur a accès à :
+
+- Un module de gestion combattants,  qui permet la création de combattant,
+l'affichage de ces derniers, la suppression et la modification de ceux-ci.
+
+- Un module de simulation de combat, ou il sélectionne les combattants.
+
+- Un module d'analyse des combats (général ou round par round)
+
+3 . Principes de fonctionnement :
+---------------------------------
+Les combattant crées peuvent être sélectionnés pour combattre, lors de la simulation d'un combat.
+Maintenant chaque caractéristique de round est déterminée aléatoirement et le résultat du match en et calculé à la fin. 
+
+4. Analyse des combats :
+------------------------
+L'analyse des combat se fait grâce a des diagrammes, concernant les caractéristiques de chaque round, ou du combat entier.
+Les diagrammes sont réalisé a partir de chartJS.
+
+
+AVANT DE TESTER :
+------------------
+- Créez votre compte en remplissant le formulaire.
+- Taper "/generate/start" pour remplir la base de données avec les combattants afin de pouvoir tester l'application.
