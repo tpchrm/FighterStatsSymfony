@@ -92,9 +92,6 @@
             "copy .\\vendor\\twbs\\bootstrap\\dist\\css\\bootstrap.min.css.map .\\public\\assets\\bootstrap\\css\\",
             "copy .\\vendor\\twbs\\bootstrap\\dist\\js\\bootstrap.bundle.min.js .\\public\\assets\\bootstrap\\js\\",
             "copy .\\vendor\\twbs\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map .\\public\\assets\\bootstrap\\js\\"
-        ],
-        "compile": [
-            "php bin/console doctrine:migrations:migrate"
         ]
     },
     "conflict": {
