@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block navlink %}
-    <a class="btn btn-outline-danger rounded-pill" href="{{ path('main_menu') }}">Retour menu</a>
+{% block navlinks %}
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('main_menu') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ path('fighter_men') }}">Combattants</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('fight_list') }}">Combats</a>
+        </li>
+    </ul>
 {% endblock %}
 
 {% block body %}
@@ -19,32 +29,262 @@
             </div>
         {% endif %}
     </div>
-    <table class="table table-dark table-bordered table-striped table-hover text-center">
-        <thead>
-        <tr>
-            <td>Nom</td>
-            <td>Prénom</td>
-            <td>Détails</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for fighter_men in list_fighter_men %}
-            <tr>
-                <td>{{ fighter_men.lastname }}</td>
-                <td>{{ fighter_men.firstname }}</td>
-                {% if is_granted('ROLE_ADMIN') %}
-                <td>
-                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
-                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
-                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
-                </td>
-                {% else %}
-                    <td>
-                        <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Flyweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Bantamweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Featherweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Lightweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Welterweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Middleweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Light Heavyweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-bordered table-striped table-hover text-center">
+                <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Détails</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fighter_men in list_fighter_men %}
+                    {% if fighter_men.division.divisionEng == 'Heavyweight' %}
+                        <tr>
+                            <td>{{ fighter_men.lastname }}</td>
+                            <td>{{ fighter_men.firstname }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                    <a class="btn btn-warning" href="{{ path('fighter_men_update',{'id': fighter_men.id}) }}">Éditer</a>
+                                    <a class="btn btn-danger" href="{{ path('fighter_men_delete',{'id': fighter_men.id}) }}">Supprimer</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-info" href="{{ path('fighter_men_show',{'id': fighter_men.id}) }}">Voir</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
