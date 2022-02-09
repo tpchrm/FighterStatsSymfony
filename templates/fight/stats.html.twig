@@ -48,8 +48,25 @@
         {% set redTakedownsArray = redTakedownsArray|merge([round.redTakedowns]) %}
     {% endfor %}
 
-{% block navlink %}
-    <a class="btn btn-outline-danger rounded-pill" href="{{ path('fight_list') }}">Retour combats</a>
+{% block navlinks %}
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('main_menu') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('fighter_men') }}">Combattants</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ path('fight_list') }}">Combats</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('help_page') }}">Aide & Documentation</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block returnlink %}
+    <button class="btn btn-outline-danger rounded-pill" onclick="history.back();">Retour</button>
 {% endblock %}
 
 {% block body %}

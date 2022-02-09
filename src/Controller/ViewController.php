@@ -54,4 +54,13 @@ class ViewController extends AbstractController
             ]
         );
     }
+
+    /**
+     * @Route("/help", name="help_page")
+     */
+    public function helpPage(): Response
+    {
+
+        return $this->render('view/help.html.twig');
+    }
 }

@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block navlinks %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ path('main_menu') }}">Accueil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('fighter_men') }}">Combattants</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('fight_list') }}">Combats</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('help_page') }}">Aide & Documentation</a>
+    </li>
+{% endblock %}
+
 {% block body %}
     <div class="py-2">
         <h1>Liste des derniers combats <a class="btn btn-secondary float-md-end" href="{{ path('fight_list') }}">Lister tout les combats</a></h1>

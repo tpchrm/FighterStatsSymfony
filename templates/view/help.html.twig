@@ -1,0 +1,266 @@
+{% extends 'base.html.twig' %}
+
+{% block navlinks %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('main_menu') }}">Accueil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('fighter_men') }}">Combattants</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('fight_list') }}">Combats</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ path('help_page') }}">Aide & Documentation</a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Liste des entités de l'application</dt>
+            <dd class="col-sm-9">
+                <ul>
+                    <li><a class="link-danger" href="#country">Country</a> (Pays)</li>
+                    <li><a class="link-danger" href="#division">Division</a> (Catégorie)</li>
+                    <li><a class="link-danger" href="#fighter">Fighter</a> (Combattant)</li>
+                    <li><a class="link-danger" href="#round">Round</a> (Round)</li>
+                    <li><a class="link-danger" href="#fight">Fight</a> (Combat)</li>
+                </ul>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt class="col-sm-3" id="country">L'entité Country (Pays)</dt>
+            <dd class="col-sm-9">
+                <p>
+                    L'entité country sert à identifier la provenance d'un combattant.
+                </p>
+                <table class="table table-dark table-bordered table-striped table-active text-center">
+                    <tr>
+                        <th>Attributs</th>
+                        <th>Définition</th>
+                        <th>Exemple de valeur</th>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">id</td>
+                        <td>Clé primaire</td>
+                        <td class="font-monospace">458</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">name</td>
+                        <td>Nom du pays</td>
+                        <td class="font-monospace">France</td>
+                    </tr>
+                </table>
+            </dd>
+
+            <dt class="col-sm-3" id="division">L'entité Division_men (Catégorie)</dt>
+            <dd class="col-sm-9">
+                <p>
+                    L'entité division_men sert à classer les combattants afin définir les adversaires possibles d'un combattant, un combattant ne peux combattre qu'un autre combattant de sa catégorie.
+                </p>
+                <table class="table table-dark table-bordered table-striped table-active text-center">
+                    <tr>
+                        <th>Attributs</th>
+                        <th>Définition</th>
+                        <th>Exemple de valeur</th>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">id</td>
+                        <td>Clé primaire</td>
+                        <td class="font-monospace">864</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">division_eng</td>
+                        <td>Nom de la catégorie en anglais</td>
+                        <td class="font-monospace">Lightweight</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">division_fr</td>
+                        <td>Nom de la catégorie en français</td>
+                        <td class="font-monospace">Poids Légers</td>
+                    </tr>
+                </table>
+            </dd>
+
+            <dt class="col-sm-3" id="fighter">L'entité Fighter_men (Combattant)</dt>
+            <dd class="col-sm-9">
+                <p>
+                    L'entité fighter_men est un combattant. Il est requis lors de la simulation d'un combat.
+                </p>
+                <table class="table table-dark table-bordered table-striped table-active text-center">
+                    <tr>
+                        <th>Attributs</th>
+                        <th>Définition</th>
+                        <th>Exemple de valeur</th>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">id</td>
+                        <td>Clé primaire</td>
+                        <td class="font-monospace">473</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">division_id</td>
+                        <td>Clé secondaire, relative à une entité division_men</td>
+                        <td class="font-monospace">96</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">origin_id</td>
+                        <td>Clé secondaire, relative à une entité country</td>
+                        <td class="font-monospace">471</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">lastname</td>
+                        <td>Nom de famille du combattant</td>
+                        <td class="font-monospace">Dariush</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">firstname</td>
+                        <td>Prénom du combattant</td>
+                        <td class="font-monospace">Beneil</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">weight</td>
+                        <td>Poids du combattant en livres</td>
+                        <td class="font-monospace">155.56</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">height</td>
+                        <td>Taille du combattant en pouces</td>
+                        <td class="font-monospace">78.6</td>
+
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">wins</td>
+                        <td>Nombre de victoire du combattant</td>
+                        <td class="font-monospace">471</td>
+                    </tr>
+                </table>
+
+                <p>
+                    Pour ajouter une photo d'un combattant récemment créé, il suffit de nommer le fichier PNG au format suivant : <span class="font-monospace">prenomnom.png</span>
+                </p>
+            </dd>
+
+            <dt class="col-sm-3" id="round">L'entité Round_men (Round)</dt>
+            <dd class="col-sm-9">
+                <p>
+                    L'entité Round_men stocke les données d'un round, ses données sont calculées grâce à la méthode <span class="font-monospace">Simulate()</span> aléatoirement selon ce schéma :
+                </p>
+
+                <script src="https://gist.github.com/tpchrm/8436d3131021fb4f9ece2322f029d72f.js" class="bg-dark"></script>
+
+                <p>
+                    Une fois simulé, le round se présente sous la forme :
+                </p>
+
+                <table class="table table-dark table-bordered table-striped table-active text-center">
+                    <tr>
+                        <th>Attributs</th>
+                        <th>Définition</th>
+                        <th>Exemple de valeur</th>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">id</td>
+                        <td>Clé primaire</td>
+                        <td class="font-monospace">473</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">fight_men_id</td>
+                        <td>Clé secondaire, relative à une entité fight_men</td>
+                        <td class="font-monospace">96</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">blue_strikes</td>
+                        <td>Nombre de frappe du coin bleu</td>
+                        <td class="font-monospace">75</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">red_strikes</td>
+                        <td>Nombre de frappe du coin rouge</td>
+                        <td class="font-monospace">56</td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-monospace">blue_significants_strikes</td>
+                        <td>Nombre de frappe significative du coin bleu</td>
+                        <td class="font-monospace">45</td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-monospace">red_significants_strikes</td>
+                        <td>Nombre de frappe significative du coin rouge</td>
+                        <td class="font-monospace">51</td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-monospace">blue_takedowns</td>
+                        <td>Nombre de takedowns réussis du coin bleu</td>
+                        <td class="font-monospace">2</td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-monospace">red_takedowns</td>
+                        <td>Nombre de takedowns réussis du coin rouge</td>
+                        <td class="font-monospace">8</td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-monospace">blue_score</td>
+                        <td>Score final du round du coin bleu</td>
+                        <td class="font-monospace">6</td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-monospace">red_score</td>
+                        <td>Score final du round du coin rouge</td>
+                        <td class="font-monospace">9</td>
+                    </tr>
+                </table>
+
+            </dd>
+
+            <dt class="col-sm-3" id="fight">L'entité Fighter_men (Combattant)</dt>
+            <dd class="col-sm-9">
+                <p>
+                    L'entité fight_men. Il est requis lors de la simulation d'un combat.
+                </p>
+                <table class="table table-dark table-bordered table-striped table-active text-center">
+                    <tr>
+                        <th>Attributs</th>
+                        <th>Définition</th>
+                        <th>Exemple de valeur</th>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">id</td>
+                        <td>Clé primaire</td>
+                        <td class="font-monospace">473</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">red_fighter_men_id</td>
+                        <td>Clé secondaire, relative à une entité fighter_men</td>
+                        <td class="font-monospace">156</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">blue_fighter_men_id</td>
+                        <td>Clé secondaire, relative à une entité fighter_men</td>
+                        <td class="font-monospace">75</td>
+                    </tr>
+                    <tr>
+                        <td class="font-monospace">winner_id</td>
+                        <td>Clé secondaire, relative à une entité fighter_men</td>
+                        <td class="font-monospace">156</td>
+                    </tr><tr>
+                        <td class="font-monospace">date</td>
+                        <td>Date du combat</td>
+                        <td class="font-monospace">02/09/2022</td>
+                    </tr>
+                </table>
+            </dd>
+        </dl>
+    </div>
+{% endblock %}
+
+
+
